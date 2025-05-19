@@ -44,7 +44,7 @@ public class LawnmowerModel : ILawnmowerModel
 
     [Required]
     [JsonPropertyName("brand")]
-    public required BrandModel Brand { get; set; }
+    public BrandModel Brand { get; set; }
     public ICollection<OrderModel>? Orders { get; set; }
 
     public LawnmowerModel()

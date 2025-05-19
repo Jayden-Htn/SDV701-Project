@@ -20,15 +20,15 @@ public class OrderModel
     [Required]
     [StringLength(50)]
     [JsonPropertyName("customerName")]
-    public required string CustomerName { get; set; }
+    public string CustomerName { get; set; }
 
     [StringLength(50)]
     [JsonPropertyName("customerEmail")]
-    public required string CustomerEmail { get; set; }
+    public string CustomerEmail { get; set; }
 
     [StringLength(20)]
     [JsonPropertyName("customerPhone")]
-    public required string CustomerPhone { get; set; }
+    public string CustomerPhone { get; set; }
 
     [JsonPropertyName("productId")]
     public int ProductId { get; set; }
@@ -37,5 +37,5 @@ public class OrderModel
     public bool Completed { get; set; }
 
     [JsonPropertyName("product")]
-    public required LawnmowerModel Product { get; set; }
+    public LawnmowerModel Product { get; set; }
 }
