@@ -7,7 +7,7 @@ public class Lawnmower
     public required string Description { get; set; }
     public decimal Price { get; set; }
     public int QuantityInStock { get; set; }
-    public required string Photo { get; set; }
+    public string? Photo { get; set; }
     public required string FuelDetails { get; set; }
     public DateTime LastUpdated { get; set; }
     public int BrandId { get; set; }
