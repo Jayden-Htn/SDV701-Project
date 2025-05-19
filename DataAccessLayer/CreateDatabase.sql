@@ -22,7 +22,7 @@ CREATE TABLE Lawnmower (
 CREATE TABLE Brand (
   Id          int IDENTITY NOT NULL, 
   Name        varchar(20) NOT NULL, 
-  Description varchar(50) NOT NULL, 
+  Description varchar(255) NOT NULL, 
   PRIMARY KEY (Id));
 
 CREATE TABLE [Order] (
@@ -34,6 +34,7 @@ CREATE TABLE [Order] (
   CustomerEmail varchar(50) NOT NULL, 
   CustomerPhone varchar(20) NOT NULL, 
   ProductId     int NOT NULL, 
+  Completed		bit NOT NULL DEFAULT 0,
   PRIMARY KEY (Id));
 
 ALTER TABLE Lawnmower ADD CONSTRAINT brand FOREIGN KEY (BrandId) REFERENCES Brand (Id);
@@ -41,7 +42,7 @@ ALTER TABLE [Order] ADD CONSTRAINT product FOREIGN KEY (ProductId) REFERENCES La
 
 
 INSERT INTO Brand (Name, Description)
-VALUES ('Tooler', 'High quality tools for professionals'),
+VALUES ('Tooler', 'High quality tools for professionals.'),
 	('MowGo', 'Tools for the everyday person.');
 
 INSERT INTO Lawnmower (Name, Price, QuantityInStock, Photo, FuelDetails, LastUpdated, TopSpeed, Weight, BrandId, Description)
