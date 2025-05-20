@@ -9,7 +9,7 @@ public class LawnmowerModel : ILawnmowerModel
     public int Id { get; set; }
 
     [JsonPropertyName("brandId")]
-    public int brandId { get; set; }
+    public int BrandId { get; set; }
 
     [Required]
     [StringLength(50)]
