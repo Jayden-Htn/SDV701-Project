@@ -18,7 +18,7 @@ public class BrandModel
     public required string Description { get; set; }
 
     [JsonPropertyName("lawnmowers")]
-    public IList<LawnmowerModel> Lawnmowers { get; set; }
+    public IList<LawnmowerModel>? Lawnmowers { get; set; }
 
     public BrandModel()
     {

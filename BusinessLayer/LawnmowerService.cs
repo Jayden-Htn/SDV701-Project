@@ -89,6 +89,7 @@ public class LawnmowerService : ServiceBase, ILawnmowerService
 
         var config = new MapperConfiguration(cfg =>
         {
+            cfg.CreateMap<Brand, BrandModel>();
             cfg.CreateMap<Order, OrderModel>();
             cfg.CreateMap<PushLawnmower, PushLawnmowerModel>();
             cfg.CreateMap<RideOnLawnmower, RideOnLawnmowerModel>();

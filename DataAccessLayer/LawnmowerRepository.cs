@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer;
 
@@ -22,8 +23,8 @@ public class LawnmowerRepository : Repository<Lawnmower>, ILawnmowerRepository
     /// Lists the lawnmowers
     /// </summary>
     /// <returns></returns>
-    public virtual IEnumerable<Lawnmower> List()
+    public override IEnumerable<Lawnmower> List()
     {
-        return All.ToList();
+        return All.Include(x => x.Brand).ToList();
     }
 }

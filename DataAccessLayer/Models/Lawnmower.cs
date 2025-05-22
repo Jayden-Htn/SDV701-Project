@@ -12,5 +12,6 @@ public class Lawnmower
     public DateTime LastUpdated { get; set; }
     public int BrandId { get; set; }
     public Brand Brand { get; set; }
+    public string Type { get; set; }
     public ICollection<Order>? Orders { get; set; }
 }

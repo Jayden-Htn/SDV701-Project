@@ -59,7 +59,7 @@
             // 
             // QuitButton
             // 
-            QuitButton.Location = new Point(847, 13);
+            QuitButton.Location = new Point(741, 12);
             QuitButton.Name = "QuitButton";
             QuitButton.Size = new Size(102, 31);
             QuitButton.TabIndex = 2;
@@ -69,17 +69,17 @@
             // ProductsPanel
             // 
             ProductsPanel.AutoScroll = true;
-            ProductsPanel.BackColor = SystemColors.ControlDark;
+            ProductsPanel.BackColor = SystemColors.ControlLight;
             ProductsPanel.FlowDirection = FlowDirection.TopDown;
             ProductsPanel.Location = new Point(28, 138);
             ProductsPanel.Name = "ProductsPanel";
-            ProductsPanel.Size = new Size(921, 355);
+            ProductsPanel.Size = new Size(815, 527);
             ProductsPanel.TabIndex = 5;
             ProductsPanel.WrapContents = false;
             // 
             // OrdersButton
             // 
-            OrdersButton.Location = new Point(847, 50);
+            OrdersButton.Location = new Point(741, 49);
             OrdersButton.Name = "OrdersButton";
             OrdersButton.Size = new Size(102, 31);
             OrdersButton.TabIndex = 10;
@@ -96,7 +96,7 @@
             // 
             // AddButton
             // 
-            AddButton.Location = new Point(847, 87);
+            AddButton.Location = new Point(741, 85);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(102, 31);
             AddButton.TabIndex = 12;
@@ -107,7 +107,7 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(982, 515);
+            ClientSize = new Size(873, 677);
             Controls.Add(AddButton);
             Controls.Add(FilterCombo);
             Controls.Add(OrdersButton);

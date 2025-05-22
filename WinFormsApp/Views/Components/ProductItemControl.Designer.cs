@@ -54,7 +54,7 @@
             // 
             DescriptionLabel.Location = new Point(33, 59);
             DescriptionLabel.Name = "DescriptionLabel";
-            DescriptionLabel.Size = new Size(416, 74);
+            DescriptionLabel.Size = new Size(416, 95);
             DescriptionLabel.TabIndex = 1;
             DescriptionLabel.Text = "DescriptionLabel";
             // 

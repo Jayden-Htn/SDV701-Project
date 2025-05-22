@@ -3,57 +3,56 @@ using RestApi.Client;
 using WinFormsApp.Models;
 using WinFormsApp.Views;
 
-namespace WinFormsApp.Presenters
+namespace WinFormsApp.Presenters;
+
+public class OrdersPresenter
 {
-    public class OrdersPresenter
+    readonly IOrdersView _view;
+    readonly IOrderClient _orderClient;
+    readonly IServiceProvider _services;
+
+    public OrdersPresenter(IOrdersView view, IOrderClient orderClient, IServiceProvider services)
     {
-        readonly IOrdersView _view;
-        readonly IOrderClient _orderClient;
-        readonly IServiceProvider _services;
+        _view = view;
+        _orderClient = orderClient;
+        _services = services;
 
-        public OrdersPresenter(IOrdersView view, IOrderClient orderClient, IServiceProvider services)
-        {
-            _view = view;
-            _orderClient = orderClient;
-            _services = services;
+        _view.EditRequested += OnEdit;
+        _view.DeleteRequested += OnDelete;
+        _view.QuitRequested += OnQuitRequested;
+        _view.LoadRequested += OnLoadRequested;
+    }
 
-            _view.EditRequested += OnEdit;
-            _view.DeleteRequested += OnDelete;
-            _view.QuitRequested += OnQuitRequested;
-            _view.LoadRequested += OnLoadRequested;
-        }
+    private async Task LoadOrdersAsync()
+    {
+        var orders = await _orderClient.ListAsync();
 
-        private async Task LoadOrdersAsync()
-        {
-            var orders = await _orderClient.ListAsync();
+        var model = new OrdersDataModel();
+        model.Orders = orders.ToList();
+        model.TotalValue = model.Orders.Sum(i => i.ItemPrice);
 
-            var model = new OrdersDataModel();
-            model.Orders = orders.ToList();
-            model.TotalValue = model.Orders.Sum(i => i.ItemPrice);
+        _view.Model = model;
+    }
 
-            _view.Model = model;
-        }
+    private async void OnEdit(object sender, int id)
+    {
+        // Can change order status
+    }
 
-        private async void OnEdit(object sender, int id)
-        {
-            // Can change order status
-        }
+    private async void OnDelete(object sender, int id)
+    {
+        _orderClient.DeleteAsync(id);
 
-        private async void OnDelete(object sender, int id)
-        {
-            _orderClient.DeleteAsync(id);
+        await LoadOrdersAsync();
+    }
 
-            await LoadOrdersAsync();
-        }
+    private void OnQuitRequested(object? sender, EventArgs e)
+    {
+        _view.Close();
+    }
 
-        private void OnQuitRequested(object? sender, EventArgs e)
-        {
-            _view.Close();
-        }
-
-        private async void OnLoadRequested(object? sender, EventArgs e)
-        {
-            await LoadOrdersAsync();
-        }
+    private async void OnLoadRequested(object? sender, EventArgs e)
+    {
+        await LoadOrdersAsync();
     }
 }
