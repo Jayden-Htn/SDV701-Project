@@ -11,7 +11,7 @@ public class Lawnmower
     public string FuelDetails { get; set; }
     public DateTime LastUpdated { get; set; }
     public int BrandId { get; set; }
-    public Brand Brand { get; set; }
+    public virtual Brand Brand { get; set; }
     public string Type { get; set; }
-    public ICollection<Order>? Orders { get; set; }
+    public virtual ICollection<Order>? Orders { get; set; }
 }

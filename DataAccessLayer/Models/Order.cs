@@ -11,5 +11,5 @@ public class Order
     public string CustomerPhone { get; set; }
     public int ProductId { get; set; }
     public bool Completed { get; set; }
-    public Lawnmower Product { get; set; }
+    public virtual Lawnmower Product { get; set; }
 }

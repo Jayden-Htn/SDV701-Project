@@ -43,6 +43,7 @@ public partial class ModelContext : DbContext
                 .WithMany(p => p.Lawnmowers)
                 .HasForeignKey(d => d.BrandId);
 
+
             modelBuilder.Entity<RideOnLawnmower>(entity =>
             {
                 entity.Property(e => e.TopSpeed);

@@ -14,8 +14,9 @@ public static class ServiceProviderExtension
     }
 
     public static IServiceCollection RegisterDbContext(this IServiceCollection container, string connectionString)
-    {
-        container.AddDbContext<ModelContext>(options => options.UseSqlServer(connectionString));
+    { 
+            container.AddDbContext<ModelContext>(options => options.UseLazyLoadingProxies()
+                                                                   .UseSqlServer(connectionString));
 
         return container;
     }
