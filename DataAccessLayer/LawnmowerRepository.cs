@@ -25,6 +25,6 @@ public class LawnmowerRepository : Repository<Lawnmower>, ILawnmowerRepository
     /// <returns></returns>
     public override IEnumerable<Lawnmower> List()
     {
-        return All.Include(x => x.Brand).ToList();
+        return All.Include(l=>l.Brand).ToList();
     }
 }
