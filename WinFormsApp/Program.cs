@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using RestApi.Client;
 using WinFormsApp.Presenters;
 using WinFormsApp.Views;
-using Microsoft.Extensions.Configuration.Json;
 
 namespace WinFormsApp;
 
@@ -15,6 +14,7 @@ static class Program
     [STAThread]
     static void Main()
     {
+        // Set up DI config
         var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
@@ -29,18 +29,22 @@ static class Program
         services.AddSingleton<ProductsForm>();
         services.AddTransient<ProductForm>();
         services.AddTransient<OrdersForm>();
-        services.AddSingleton<IProductsView>(sp => (IProductsView)sp.GetRequiredService<ProductsForm>());
-        services.AddSingleton<IProductView>(sp => (IProductView)sp.GetRequiredService<ProductForm>());
-        services.AddSingleton<IOrdersView>(sp => (IOrdersView)sp.GetRequiredService<OrdersForm>());
+        services.AddSingleton<IProductsView>(sp => sp.GetRequiredService<ProductsForm>());
+        services.AddSingleton<IProductView>(sp => sp.GetRequiredService<ProductForm>());
+        services.AddSingleton<IOrdersView>(sp => sp.GetRequiredService<OrdersForm>());
         services.AddSingleton<ProductsPresenter>();
         services.AddSingleton<ProductPresenter>();
         services.AddSingleton<OrdersPresenter>();
 
         var provider = services.BuildServiceProvider();
-
         ApplicationConfiguration.Initialize();
 
+        // Start presenters and run
         var mainView = provider.GetRequiredService<IProductsView>();
+
+        _ = provider.GetRequiredService<ProductsPresenter>();
+        _ = provider.GetRequiredService<ProductPresenter>();
+        _ = provider.GetRequiredService<OrdersPresenter>();
 
         Application.Run((Form)mainView);
     }

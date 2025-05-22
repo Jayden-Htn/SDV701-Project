@@ -1,6 +1,4 @@
-﻿using DataAccessLayer;
-using DataAccessLayer.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using DataAccessLayer.Models;
 
 namespace DataAccessLayer;
 

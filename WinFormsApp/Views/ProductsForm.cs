@@ -1,59 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WinFormsApp.Models;
-using WinFormsApp.Views.Components;
+﻿using WinFormsApp.Models;
 
-namespace WinFormsApp.Views
+namespace WinFormsApp.Views;
+
+public partial class ProductsForm : Form, IProductsView
 {
-    public partial class ProductsForm : Form, IProductsView
+    public event EventHandler AddRequested;
+    public event EventHandler<int> EditRequested;
+    public event EventHandler<int> DeleteRequested;
+    public event EventHandler QuitRequested;
+    public event EventHandler LoadRequested;
+
+    public ProductsForm()
     {
-        public event EventHandler AddRequested;
-        public event EventHandler<int> EditRequested;
-        public event EventHandler<int> DeleteRequested;
-        public event EventHandler QuitRequested;
-        public event EventHandler LoadRequested;
+        InitializeComponent();
 
-        public ProductsForm()
+        AddButton.Click += OnAddButtonClick;
+        QuitButton.Click += OnQuitButtonClick;
+        Load += OnFormLoad;
+    }
+
+    public ProductsDataModel Model
+    {
+        set
         {
-            InitializeComponent();
-
-            AddButton.Click += OnAddButtonClick;
-            QuitButton.Click += OnQuitButtonClick;
-            Load += OnMainFormLoad;
-        }
-
-        public ProductsDataModel Model
-        {
-            set
+            foreach (var product in value?.Lawnmowers)
             {
-                foreach (var product in value?.Lawnmowers)
-                {
-                    var item = new ProductItemControl();
-                    item.SetData(product);
-                    ProductsPanel.Controls.Add(item);
-                }
+                var item = new ProductItemControl();
+                item.SetData(product);
+                ProductsPanel.Controls.Add(item);
             }
         }
-        private void OnAddButtonClick(object sender, EventArgs e)
-        {
-            AddRequested?.Invoke(this, EventArgs.Empty);
-        }
+    }
+    private void OnAddButtonClick(object sender, EventArgs e)
+    {
+        AddRequested?.Invoke(this, EventArgs.Empty);
+    }
 
-        private void OnQuitButtonClick(object sender, EventArgs e)
-        {
-            QuitRequested?.Invoke(this, EventArgs.Empty);
-        }
+    private void OnQuitButtonClick(object sender, EventArgs e)
+    {
+        QuitRequested?.Invoke(this, EventArgs.Empty);
+    }
 
-        private void OnMainFormLoad(object sender, EventArgs e)
-        {
-            LoadRequested?.Invoke(this, EventArgs.Empty);
-        }
+    private void OnFormLoad(object sender, EventArgs e)
+    {
+        LoadRequested?.Invoke(this, EventArgs.Empty);
     }
 }

@@ -36,8 +36,9 @@ public partial class ModelContext : DbContext
             entity.Property(e => e.LastUpdated).HasColumnType("datetime");
             entity.Property(e => e.BrandId);
             entity.HasDiscriminator<string>("Type")
-                .HasValue<RideOnLawnmower>("RideOnLawnmower")
-                .HasValue<PushLawnmower>("PushLawnmower");
+                .HasValue<Lawnmower>("Base")
+                .HasValue<RideOnLawnmower>("RideOn")
+                .HasValue<PushLawnmower>("Push");
             entity.HasOne(d => d.Brand)
                 .WithMany(p => p.Lawnmowers)
                 .HasForeignKey(d => d.BrandId);
