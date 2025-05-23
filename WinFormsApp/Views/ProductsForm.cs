@@ -1,4 +1,5 @@
-﻿using WinFormsApp.Models;
+﻿using Models;
+using WinFormsApp.Models;
 
 namespace WinFormsApp.Views;
 
@@ -23,6 +24,23 @@ public partial class ProductsForm : Form, IProductsView
     {
         set
         {
+            BrandModel newBrand = new()
+            {
+                Id = 0,
+                Name = "All",
+                Description = "View every lawnmower we have in stock."
+            };
+
+            BrandModel[] brands = new[] { newBrand }
+                .Concat(value.Brands)
+                .ToArray();
+
+            FilterCombo.Items.Clear();
+            FilterCombo.Items.AddRange(brands);
+            FilterCombo.DisplayMember = "Name";
+            FilterCombo.ValueMember = "Id";
+            FilterCombo.SelectedIndex = 0;
+
             foreach (var product in value?.Lawnmowers)
             {
                 var item = new ProductItemControl();

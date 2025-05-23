@@ -24,12 +24,14 @@ namespace WinFormsApp.Presenters
             _view.LoadRequested += OnLoadRequested;
         }
 
-        private async Task LoadLawnmowersAsync()
+        private async Task LoadDataAsync()
         {
             var lawnmowers = await _lawnmowerClient.ListAsync();
+            var brands = await _lawnmowerClient.ListBrandsAsync();
 
             var model = new ProductsDataModel();
             model.Lawnmowers = lawnmowers.ToList();
+            model.Brands = brands.ToList();
 
             _view.Model = model;
         }
@@ -44,7 +46,7 @@ namespace WinFormsApp.Presenters
             if (form.ShowDialog() == DialogResult.OK)
             {
                 await _lawnmowerClient.AddAsync(form.GetData());
-                await LoadLawnmowersAsync();
+                await LoadDataAsync();
             }
         }
 
@@ -60,14 +62,14 @@ namespace WinFormsApp.Presenters
             if (form.ShowDialog() == DialogResult.OK)
             {
                 await _lawnmowerClient.AddAsync(form.GetData());
-                await LoadLawnmowersAsync();
+                await LoadDataAsync();
             }
         }
 
         private async void OnDelete(object sender, int id)
         {
             await _lawnmowerClient.DeleteAsync(id);
-            await LoadLawnmowersAsync();
+            await LoadDataAsync();
         }
 
         private void OnQuitRequested(object? sender, EventArgs e)
@@ -77,7 +79,7 @@ namespace WinFormsApp.Presenters
 
         private async void OnLoadRequested(object? sender, EventArgs e)
         {
-            await LoadLawnmowersAsync();
+            await LoadDataAsync();
         }
     }
 }

@@ -27,4 +27,13 @@ public class LawnmowerRepository : Repository<Lawnmower>, ILawnmowerRepository
     {
         return All.Include(l=>l.Brand).ToList();
     }
+
+    /// <summary>
+    /// Lists the product brands
+    /// </summary>
+    /// <returns></returns>
+    public virtual IEnumerable<Brand> Brands()
+    {
+        return All.Select(l => l.Brand).Distinct().ToList();
+    }
 }

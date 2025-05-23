@@ -105,4 +105,22 @@ public class LawnmowerService : ServiceBase, ILawnmowerService
 
         return models;
     }
+
+    public IList<BrandModel> Brands()
+    {
+        var brands = UnitOfWork.LawnmowerRepository.Brands();
+
+        var config = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<Brand, BrandModel>()
+                .ForMember(dest => dest.Lawnmowers, opt => opt.Ignore());
+        });
+
+        IMapper mapper = new Mapper(config);
+
+        var models = new List<BrandModel>();
+        mapper.Map(brands, models);
+
+        return models;
+    }
 }

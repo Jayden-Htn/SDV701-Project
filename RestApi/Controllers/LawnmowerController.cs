@@ -50,4 +50,10 @@ public class LawnmowerController : ControllerBase
         return _lawnmowerService.Delete(id);
     }
 
+    // GET: api/lawnmower
+    [HttpGet("brands")]
+    public IEnumerable<BrandModel> Brands()
+    {
+        return _lawnmowerService.Brands();
+    }
 }

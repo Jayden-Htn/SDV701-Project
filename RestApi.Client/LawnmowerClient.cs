@@ -34,4 +34,9 @@ public class LawnmowerClient : ClientBase, ILawnmowerClient
         await DeleteAsync($"/api/lawnmower/{id}");
         return;
     }
+
+    public async Task<IList<BrandModel>> ListBrandsAsync()
+    {
+        return await GetAsync<IList<BrandModel>>($"/api/lawnmower/brands");
+    }
 }

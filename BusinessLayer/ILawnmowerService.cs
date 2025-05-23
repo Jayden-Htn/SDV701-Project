@@ -9,4 +9,5 @@ public interface ILawnmowerService
     LawnmowerModel Get(int id);
     IList<LawnmowerModel> List();
     int Update(LawnmowerModel model);
+    IList<BrandModel> Brands();
 }
