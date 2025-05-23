@@ -35,7 +35,7 @@ public partial class ModelContext : DbContext
             entity.Property(e => e.FuelDetails);
             entity.Property(e => e.LastUpdated).HasColumnType("datetime");
             entity.Property(e => e.BrandId);
-            entity.HasDiscriminator<string>("Type")
+            entity.HasDiscriminator(b => b.Type)
                 .HasValue<Lawnmower>("Base")
                 .HasValue<RideOnLawnmower>("RideOn")
                 .HasValue<PushLawnmower>("Push");
