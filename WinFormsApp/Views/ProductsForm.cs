@@ -10,6 +10,7 @@ public partial class ProductsForm : Form, IProductsView
     public event EventHandler<int> DeleteRequested;
     public event EventHandler QuitRequested;
     public event EventHandler LoadRequested;
+    public event EventHandler<int> FilterRequested;
 
     public ProductsForm()
     {
@@ -17,6 +18,7 @@ public partial class ProductsForm : Form, IProductsView
 
         AddButton.Click += OnAddButtonClick;
         QuitButton.Click += OnQuitButtonClick;
+        FilterCombo.SelectedValueChanged += OnBrandFilterChange;
         Load += OnFormLoad;
     }
 
@@ -24,31 +26,41 @@ public partial class ProductsForm : Form, IProductsView
     {
         set
         {
-            BrandModel newBrand = new()
-            {
-                Id = 0,
-                Name = "All",
-                Description = "View every lawnmower we have in stock."
-            };
-
-            BrandModel[] brands = new[] { newBrand }
-                .Concat(value.Brands)
-                .ToArray();
-
-            FilterCombo.Items.Clear();
-            FilterCombo.Items.AddRange(brands);
-            FilterCombo.DisplayMember = "Name";
-            FilterCombo.ValueMember = "Id";
-            FilterCombo.SelectedIndex = 0;
-
-            foreach (var product in value?.Lawnmowers)
-            {
-                var item = new ProductItemControl();
-                item.SetData(product);
-                ProductsPanel.Controls.Add(item);
-            }
+            SetData(value);
         }
     }
+
+    private void SetData(ProductsDataModel value) 
+    {
+        // Set brand filter
+        BrandModel newBrand = new()
+        {
+            Id = 0,
+            Name = "All",
+            Description = "View every lawnmower we have in stock."
+        };
+
+        BrandModel[] brands = new[] { newBrand }
+            .Concat(value.Brands)
+            .ToArray();
+
+        FilterCombo.Items.Clear();
+        FilterCombo.Items.AddRange(brands);
+        FilterCombo.DisplayMember = "Name";
+        FilterCombo.ValueMember = "Id";
+        FilterCombo.SelectedIndex = value.CurrentBrandId;
+
+        // Set products
+        ProductsPanel.Controls.Clear();
+
+        foreach (var product in value?.Lawnmowers)
+        {
+            var item = new ProductItemControl();
+            item.SetData(product);
+            ProductsPanel.Controls.Add(item);
+        }
+    }
+
     private void OnAddButtonClick(object sender, EventArgs e)
     {
         AddRequested?.Invoke(this, EventArgs.Empty);
@@ -57,6 +69,15 @@ public partial class ProductsForm : Form, IProductsView
     private void OnQuitButtonClick(object sender, EventArgs e)
     {
         QuitRequested?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnBrandFilterChange(object sender, EventArgs e)
+    {
+        if (FilterCombo.SelectedItem != null)
+        {
+            BrandModel brand = FilterCombo.SelectedItem as BrandModel;
+            FilterRequested?.Invoke(this, brand.Id);
+        }
     }
 
     private void OnFormLoad(object sender, EventArgs e)

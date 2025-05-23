@@ -14,9 +14,9 @@ public class LawnmowerClient : ClientBase, ILawnmowerClient
         return await GetAsync<LawnmowerModel>($"/api/lawnmower/{id}");
     }
 
-    public async Task<IList<LawnmowerModel>> ListAsync()
+    public async Task<IList<LawnmowerModel>> ListAsync(int brandId)
     {
-        return await GetAsync<IList<LawnmowerModel>>($"/api/lawnmower");
+        return await GetAsync<IList<LawnmowerModel>>($"/api/lawnmower/list/{brandId}");
     }
 
     public async Task<int> AddAsync(LawnmowerModel model)

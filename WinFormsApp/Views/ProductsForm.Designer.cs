@@ -73,7 +73,7 @@
             ProductsPanel.FlowDirection = FlowDirection.TopDown;
             ProductsPanel.Location = new Point(28, 138);
             ProductsPanel.Name = "ProductsPanel";
-            ProductsPanel.Size = new Size(815, 527);
+            ProductsPanel.Size = new Size(815, 427);
             ProductsPanel.TabIndex = 5;
             ProductsPanel.WrapContents = false;
             // 
@@ -88,6 +88,7 @@
             // 
             // FilterCombo
             // 
+            FilterCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             FilterCombo.FormattingEnabled = true;
             FilterCombo.Location = new Point(149, 87);
             FilterCombo.Name = "FilterCombo";
@@ -107,7 +108,7 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(873, 677);
+            ClientSize = new Size(873, 593);
             Controls.Add(AddButton);
             Controls.Add(FilterCombo);
             Controls.Add(OrdersButton);

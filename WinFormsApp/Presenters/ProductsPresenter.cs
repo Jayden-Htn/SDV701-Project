@@ -11,6 +11,9 @@ namespace WinFormsApp.Presenters
         readonly ILawnmowerClient _lawnmowerClient;
         readonly IServiceProvider _services;
 
+        private int _currentBrandFilterId = 0;
+        IList<BrandModel> _brands;
+
         public ProductsPresenter(IProductsView view, ILawnmowerClient lawnmowerClient, IServiceProvider services)
         {
             _view = view;
@@ -22,16 +25,23 @@ namespace WinFormsApp.Presenters
             _view.DeleteRequested += OnDelete;
             _view.QuitRequested += OnQuitRequested;
             _view.LoadRequested += OnLoadRequested;
+            _view.FilterRequested += OnFilterRequested;
         }
 
         private async Task LoadDataAsync()
         {
-            var lawnmowers = await _lawnmowerClient.ListAsync();
-            var brands = await _lawnmowerClient.ListBrandsAsync();
+            var lawnmowers = await _lawnmowerClient.ListAsync(_currentBrandFilterId);
+
+            if (_brands == null)
+            {
+                _brands = await _lawnmowerClient.ListBrandsAsync();
+            }
+            
 
             var model = new ProductsDataModel();
             model.Lawnmowers = lawnmowers.ToList();
-            model.Brands = brands.ToList();
+            model.Brands = _brands.ToList();
+            model.CurrentBrandId = _currentBrandFilterId;
 
             _view.Model = model;
         }
@@ -80,6 +90,15 @@ namespace WinFormsApp.Presenters
         private async void OnLoadRequested(object? sender, EventArgs e)
         {
             await LoadDataAsync();
+        }
+
+        private async void OnFilterRequested(object? sender, int brandId)
+        {
+            if (brandId != _currentBrandFilterId)
+            {
+                _currentBrandFilterId = brandId;
+                LoadDataAsync();
+            }
         }
     }
 }

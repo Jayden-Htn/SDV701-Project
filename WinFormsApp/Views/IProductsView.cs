@@ -11,6 +11,7 @@ public interface IProductsView
     event EventHandler<int> DeleteRequested;
     event EventHandler QuitRequested;
     event EventHandler LoadRequested;
+    event EventHandler<int> FilterRequested;
 
     void Close();
 }

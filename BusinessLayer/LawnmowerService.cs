@@ -83,9 +83,14 @@ public class LawnmowerService : ServiceBase, ILawnmowerService
         return Task.CompletedTask;
     }
 
-    public IList<LawnmowerModel> List()
+    public IList<LawnmowerModel> List(int brandId)
     {
         var lawnmowers = UnitOfWork.LawnmowerRepository.List();
+
+        if (brandId != 0)
+        {
+            lawnmowers = lawnmowers.Where(l => l.BrandId == brandId);
+        }
 
         var config = new MapperConfiguration(cfg =>
         {

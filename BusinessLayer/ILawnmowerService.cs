@@ -7,7 +7,7 @@ public interface ILawnmowerService
     int Add(LawnmowerModel model);
     Task Delete(int id);
     LawnmowerModel Get(int id);
-    IList<LawnmowerModel> List();
+    IList<LawnmowerModel> List(int brandId);
     int Update(LawnmowerModel model);
     IList<BrandModel> Brands();
 }

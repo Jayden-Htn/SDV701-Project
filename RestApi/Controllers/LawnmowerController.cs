@@ -15,11 +15,11 @@ public class LawnmowerController : ControllerBase
         _lawnmowerService = lawnmowerService;
     }
 
-    // GET: api/lawnmower
-    [HttpGet]
-    public IEnumerable<LawnmowerModel> List()
+    // GET api/lawnmower/1
+    [HttpGet("list/{brandId}")]
+    public IEnumerable<LawnmowerModel> List(int brandId)
     {
-        return _lawnmowerService.List();
+        return _lawnmowerService.List(brandId);
     }
 
     // GET api/lawnmower/1
@@ -50,7 +50,7 @@ public class LawnmowerController : ControllerBase
         return _lawnmowerService.Delete(id);
     }
 
-    // GET: api/lawnmower
+    // GET api/lawnmower/brands
     [HttpGet("brands")]
     public IEnumerable<BrandModel> Brands()
     {
