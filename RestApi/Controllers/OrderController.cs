@@ -6,47 +6,47 @@ namespace RestApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class LawnmowerController : ControllerBase
+public class OrderController : ControllerBase
 {
-    ILawnmowerService _lawnmowerService;
+    IOrderService _orderService;
 
-    public LawnmowerController(ILawnmowerService lawnmowerService)
+    public OrderController(IOrderService orderService)
     {
-        _lawnmowerService = lawnmowerService;
+        _orderService = orderService;
     }
 
-    // GET: api/lawnmower
+    // GET: api/order
     [HttpGet]
-    public IEnumerable<LawnmowerModel> List()
+    public IEnumerable<OrderModel> Get()
     {
-        return _lawnmowerService.List();
+        return _orderService.List();
     }
 
-    // GET api/lawnmower/1
+    // GET api/order/1
     [HttpGet("{id}")]
-    public LawnmowerModel Get(int id)
+    public OrderModel Get(int id)
     {
-        return _lawnmowerService.Get(id);
+        return _orderService.Get(id);
     }
 
-    // POST api/lawnmower
+    // POST api/order
     [HttpPost]
-    public int Post([FromBody] LawnmowerModel model)
+    public int Post([FromBody] OrderModel model)
     {
-        return _lawnmowerService.Add(model);
+        return _orderService.Add(model);
     }
 
-    // PUT api/lawnmower
+    // PUT api/order
     [HttpPut]
-    public int Put([FromBody] LawnmowerModel model)
+    public int Put([FromBody] OrderModel model)
     {
-        return _lawnmowerService.Update(model);
+        return _orderService.Update(model);
     }
 
-    // DELETE api/lawnmower/1
+    // DELETE api/order/1
     [HttpDelete("{id}")]
     public Task Delete(int id)
     {
-        return _lawnmowerService.Delete(id);
+        return _orderService.Delete(id);
     }
 }
