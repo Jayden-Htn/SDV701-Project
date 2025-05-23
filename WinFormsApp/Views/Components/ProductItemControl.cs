@@ -15,7 +15,7 @@ public partial class ProductItemControl : UserControl
         DescriptionLabel.Text = product.Description;
         PriceLabel.Text = $"${product.Price}";
         StockLabel.Text = $"{product.QuantityInStock} available";
-        //BrandLabel.Text = product.Brand.Name;
+        BrandLabel.Text = product.Brand.Name;
         TypeLabel.Text = product.Type;
         //ImageBox.Image = product.Photo;
     }

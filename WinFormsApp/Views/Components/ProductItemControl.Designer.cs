@@ -80,7 +80,7 @@
             // BrandLabel
             // 
             BrandLabel.AutoSize = true;
-            BrandLabel.Location = new Point(251, 165);
+            BrandLabel.Location = new Point(279, 165);
             BrandLabel.Name = "BrandLabel";
             BrandLabel.Size = new Size(51, 21);
             BrandLabel.TabIndex = 4;
