@@ -8,7 +8,7 @@ namespace WinFormsApp.Views
         public event EventHandler AddRequested;
         public event EventHandler<int> EditRequested;
         public event EventHandler<int> DeleteRequested;
-        public event EventHandler QuitRequested;
+        public event EventHandler CloseRequested;
         public event EventHandler LoadRequested;
 
         public OrdersForm()
@@ -36,7 +36,7 @@ namespace WinFormsApp.Views
 
         private void OnCloseButtonClick(object sender, EventArgs e)
         {
-            QuitRequested?.Invoke(this, EventArgs.Empty);
+            CloseRequested?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnOrdersFormLoad(object sender, EventArgs e)

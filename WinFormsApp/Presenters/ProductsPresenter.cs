@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Models;
 using RestApi.Client;
 using WinFormsApp.Models;
 using WinFormsApp.Views;
@@ -106,13 +107,8 @@ namespace WinFormsApp.Presenters
 
         private async void OnViewOrders(object sender, EventArgs e)
         {
-            var form = (OrdersForm)_services.GetService(typeof(OrdersForm));
-
-            var data = new OrdersDataModel();
-            var orders = await _orderClient.ListAsync();
-            data.Orders = orders;
-            data.TotalValue = orders.Sum(i => i.ItemPrice);
-            form.Model = data;
+            var presenter = _services.GetRequiredService<OrdersPresenter>();
+            var form = (OrdersForm)presenter.View;
 
             if (form.ShowDialog() == DialogResult.OK)
             {

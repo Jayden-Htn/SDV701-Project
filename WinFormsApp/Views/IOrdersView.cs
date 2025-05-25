@@ -8,7 +8,7 @@ public interface IOrdersView
 
     event EventHandler<int> EditRequested;
     event EventHandler<int> DeleteRequested;
-    event EventHandler QuitRequested;
+    event EventHandler CloseRequested;
     event EventHandler LoadRequested;
 
     void Close();

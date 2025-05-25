@@ -10,6 +10,8 @@ public class OrdersPresenter
     readonly IOrderClient _orderClient;
     readonly IServiceProvider _services;
 
+    public IOrdersView View => _view;
+
     public OrdersPresenter(IOrdersView view, IOrderClient orderClient, IServiceProvider services)
     {
         _view = view;
@@ -18,7 +20,7 @@ public class OrdersPresenter
 
         _view.EditRequested += OnEdit;
         _view.DeleteRequested += OnDelete;
-        _view.QuitRequested += OnQuitRequested;
+        _view.CloseRequested += OnCloseRequested;
         _view.LoadRequested += OnLoadRequested;
     }
 
@@ -30,7 +32,7 @@ public class OrdersPresenter
         model.Orders = orders.ToList();
         model.TotalValue = model.Orders.Sum(i => i.ItemPrice);
 
-        _view.Model = model;
+        View.Model = model;
     }
 
     private async void OnEdit(object sender, int id)
@@ -45,9 +47,9 @@ public class OrdersPresenter
         await LoadOrdersAsync();
     }
 
-    private void OnQuitRequested(object? sender, EventArgs e)
+    private void OnCloseRequested(object? sender, EventArgs e)
     {
-        _view.Close();
+        View.Close();
     }
 
     private async void OnLoadRequested(object? sender, EventArgs e)
