@@ -132,6 +132,7 @@
             CompleteCheckbox.TabIndex = 9;
             CompleteCheckbox.Text = "Completed";
             CompleteCheckbox.UseVisualStyleBackColor = true;
+            CompleteCheckbox.CheckedChanged += CompleteCheckbox_CheckedChanged;
             // 
             // DeleteButton
             // 

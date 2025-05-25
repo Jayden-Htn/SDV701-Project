@@ -5,7 +5,7 @@ namespace WinFormsApp.Views.Components
 {
     public partial class OrderItemControl : UserControl
     {
-        public event EventHandler<int> StatusChangeRequested;
+        public event EventHandler<OrderModel> StatusChangeRequested;
         public event EventHandler<int> DeleteRequested;
 
         private OrderModel _model;
@@ -40,10 +40,11 @@ namespace WinFormsApp.Views.Components
             CompleteCheckbox.Checked = order.Completed;
         }
 
-        //public void OnChangeStatusClick(object sender, EventArgs e)
-        //{
-        //    ChangeStatusRequested?.Invoke(this, _model.Id);
-        //}  
+        public void CompleteCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            _model.Completed = CompleteCheckbox.Checked;
+            StatusChangeRequested?.Invoke(this, _model);
+        }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {

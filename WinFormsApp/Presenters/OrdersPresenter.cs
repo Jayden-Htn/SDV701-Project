@@ -1,4 +1,5 @@
-﻿using RestApi.Client;
+﻿using Models;
+using RestApi.Client;
 using WinFormsApp.Models;
 using WinFormsApp.Views;
 
@@ -35,9 +36,9 @@ public class OrdersPresenter
         View.Model = model;
     }
 
-    private async void OnStatusChange(object sender, int id)
+    private async void OnStatusChange(object sender, OrderModel model)
     {
-        // Can change order status
+        await _orderClient.UpdateAsync(model);
     }
 
     private async void OnDelete(object sender, int id)

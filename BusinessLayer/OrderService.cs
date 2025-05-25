@@ -63,12 +63,8 @@ public class OrderService : ServiceBase, IOrderService
 
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<OrderModel, Order>();
-            cfg.CreateMap<PushLawnmowerModel, PushLawnmower>();
-            cfg.CreateMap<RideOnLawnmowerModel, RideOnLawnmower>();
-            cfg.CreateMap<ILawnmowerModel, Lawnmower>()
-                    .Include<PushLawnmowerModel, PushLawnmower>()
-                    .Include<RideOnLawnmowerModel, RideOnLawnmower>();
+            cfg.CreateMap<OrderModel, Order>()
+                .ForMember(x => x.Product, opt => opt.Ignore());
         });
 
         IMapper mapper = new Mapper(config);

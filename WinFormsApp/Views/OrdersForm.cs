@@ -1,4 +1,5 @@
 ﻿using WinFormsApp.Models;
+using Models;
 using WinFormsApp.Views.Components;
 
 namespace WinFormsApp.Views
@@ -6,7 +7,7 @@ namespace WinFormsApp.Views
     public partial class OrdersForm : Form, IOrdersView
     {
         public event EventHandler AddRequested;
-        public event EventHandler<int> StatusChangeRequested;
+        public event EventHandler<OrderModel> StatusChangeRequested;
         public event EventHandler<int> DeleteRequested;
         public event EventHandler CloseRequested;
         public event EventHandler LoadRequested;
@@ -36,9 +37,9 @@ namespace WinFormsApp.Views
                 var item = new OrderItemControl();
                 item.SetData(order);
 
-                item.StatusChangeRequested += (obj, id) =>
+                item.StatusChangeRequested += (obj, model) =>
                 {
-                    StatusChangeRequested?.Invoke(this, id);
+                    StatusChangeRequested?.Invoke(this, model);
                 };
                 item.DeleteRequested += (obj, id) =>
                 {

@@ -29,7 +29,6 @@ public class LawnmowerModel : ILawnmowerModel
     [JsonPropertyName("quantityInStock")]
     public int QuantityInStock { get; set; }
 
-    [Required]
     [JsonPropertyName("photo")]
     public string? Photo { get; set; }
 
