@@ -6,9 +6,7 @@ public interface IProductItemView
 {
     ProductDataModel Model { set; }
 
-    event EventHandler EditRequested;
-    event EventHandler DeleteRequested;
-    event EventHandler LoadRequested;
+    public event EventHandler<int> EditRequested;
+    public event EventHandler<int> DeleteRequested;
 
-    void Close();
 }

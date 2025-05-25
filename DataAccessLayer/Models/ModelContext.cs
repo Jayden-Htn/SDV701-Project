@@ -39,9 +39,9 @@ public partial class ModelContext : DbContext
                 .HasValue<Lawnmower>("Base")
                 .HasValue<RideOnLawnmower>("RideOn")
                 .HasValue<PushLawnmower>("Push");
-            entity.HasOne(d => d.Brand)
-                .WithMany(p => p.Lawnmowers)
-                .HasForeignKey(d => d.BrandId);
+            entity.HasOne(l => l.Brand)
+                .WithMany(b => b.Lawnmowers)
+                .HasForeignKey(l => l.BrandId);
 
 
             modelBuilder.Entity<RideOnLawnmower>(entity =>
@@ -66,9 +66,10 @@ public partial class ModelContext : DbContext
                 entity.Property(e => e.CustomerPhone).IsRequired().HasMaxLength(20);
                 entity.Property(e => e.Completed).HasColumnType("bit");
                 entity.Property(e => e.ProductId);
-                entity.HasOne(d => d.Product)
+                entity.HasOne(o => o.Product)
                 .WithMany(p => p.Orders)
-                .HasForeignKey(d => d.ProductId);
+                .HasForeignKey(o => o.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Brand>(entity =>

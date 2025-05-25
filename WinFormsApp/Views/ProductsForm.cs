@@ -6,11 +6,11 @@ namespace WinFormsApp.Views;
 public partial class ProductsForm : Form, IProductsView
 {
     public event EventHandler AddRequested;
-    public event EventHandler<int> EditRequested;
-    public event EventHandler<int> DeleteRequested;
     public event EventHandler QuitRequested;
     public event EventHandler LoadRequested;
     public event EventHandler<int> FilterRequested;
+    public event EventHandler<int> EditRequested;
+    public event EventHandler<int> DeleteRequested;
 
     public ProductsForm()
     {
@@ -57,6 +57,16 @@ public partial class ProductsForm : Form, IProductsView
         {
             var item = new ProductItemControl();
             item.SetData(product);
+
+            item.EditRequested += (obj, id) =>
+            {
+                EditRequested?.Invoke(this, id);
+            };
+            item.DeleteRequested += (obj, id) =>
+            {
+                DeleteRequested?.Invoke(this, id);
+            };
+
             ProductsPanel.Controls.Add(item);
         }
     }

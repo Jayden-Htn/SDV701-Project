@@ -51,7 +51,8 @@ CREATE TABLE [Order] (
   PRIMARY KEY (Id));
 
 ALTER TABLE Lawnmower ADD CONSTRAINT lawnmowerBrand FOREIGN KEY (BrandId) REFERENCES Brand (Id);
-ALTER TABLE [Order] ADD CONSTRAINT orderProduct FOREIGN KEY (ProductId) REFERENCES Lawnmower (Id);
+ALTER TABLE [Order] ADD CONSTRAINT orderProduct FOREIGN KEY (ProductId) REFERENCES Lawnmower (Id) ON DELETE CASCADE;
+-- Cascade delete not ideal but added to simply this POC
 
 
 -- Add data
