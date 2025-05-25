@@ -85,6 +85,7 @@
             OrdersButton.TabIndex = 10;
             OrdersButton.Text = "Orders";
             OrdersButton.UseVisualStyleBackColor = true;
+            OrdersButton.Click += OrdersButton_Click;
             // 
             // FilterCombo
             // 

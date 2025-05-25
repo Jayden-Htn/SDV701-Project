@@ -42,7 +42,7 @@
             // OrdersPanel
             // 
             OrdersPanel.AutoScroll = true;
-            OrdersPanel.BackColor = SystemColors.ControlDark;
+            OrdersPanel.BackColor = SystemColors.ControlLight;
             OrdersPanel.FlowDirection = FlowDirection.TopDown;
             OrdersPanel.Location = new Point(29, 167);
             OrdersPanel.Name = "OrdersPanel";
@@ -83,17 +83,17 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 8.861538F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(40, 143);
+            label3.Location = new Point(47, 143);
             label3.Name = "label3";
-            label3.Size = new Size(26, 21);
+            label3.Size = new Size(44, 21);
             label3.TabIndex = 12;
-            label3.Text = "ID";
+            label3.Text = "Item";
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 8.861538F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(145, 143);
+            label4.Location = new Point(253, 143);
             label4.Name = "label4";
             label4.Size = new Size(60, 21);
             label4.TabIndex = 13;
@@ -103,7 +103,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 8.861538F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(433, 143);
+            label5.Location = new Point(466, 143);
             label5.Name = "label5";
             label5.Size = new Size(115, 21);
             label5.TabIndex = 14;
@@ -113,7 +113,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 8.861538F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(757, 143);
+            label6.Location = new Point(695, 143);
             label6.Name = "label6";
             label6.Size = new Size(112, 21);
             label6.TabIndex = 15;

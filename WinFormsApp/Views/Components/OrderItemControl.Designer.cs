@@ -39,6 +39,7 @@
             DateOrderedLabel = new Label();
             CompleteCheckbox = new CheckBox();
             DeleteButton = new Button();
+            BrandLabel = new Label();
             SuspendLayout();
             // 
             // IdLabel
@@ -55,9 +56,9 @@
             ProductLabel.AutoSize = true;
             ProductLabel.Location = new Point(65, 15);
             ProductLabel.Name = "ProductLabel";
-            ProductLabel.Size = new Size(52, 21);
+            ProductLabel.Size = new Size(64, 21);
             ProductLabel.TabIndex = 1;
-            ProductLabel.Text = "label1";
+            ProductLabel.Text = "Product";
             // 
             // PriceLabel
             // 
@@ -141,10 +142,20 @@
             DeleteButton.Text = "Delete";
             DeleteButton.UseVisualStyleBackColor = true;
             // 
+            // BrandLabel
+            // 
+            BrandLabel.AutoSize = true;
+            BrandLabel.Location = new Point(65, 46);
+            BrandLabel.Name = "BrandLabel";
+            BrandLabel.Size = new Size(51, 21);
+            BrandLabel.TabIndex = 11;
+            BrandLabel.Text = "Brand";
+            // 
             // OrderItemControl
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(BrandLabel);
             Controls.Add(DeleteButton);
             Controls.Add(CompleteCheckbox);
             Controls.Add(DateOrderedLabel);
@@ -175,5 +186,6 @@
         private Label DateOrderedLabel;
         private CheckBox CompleteCheckbox;
         private Button DeleteButton;
+        private Label BrandLabel;
     }
 }

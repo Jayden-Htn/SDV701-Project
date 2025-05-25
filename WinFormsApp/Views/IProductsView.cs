@@ -12,6 +12,7 @@ public interface IProductsView
     event EventHandler QuitRequested;
     event EventHandler LoadRequested;
     event EventHandler<int> FilterRequested;
+    event EventHandler ViewOrders;
 
     void Close();
 }

@@ -9,15 +9,17 @@ namespace WinFormsApp.Presenters
     {
         readonly IProductsView _view;
         readonly ILawnmowerClient _lawnmowerClient;
+        readonly IOrderClient _orderClient;
         readonly IServiceProvider _services;
 
         private int _currentBrandFilterId = 0;
         IList<BrandModel> _brands;
 
-        public ProductsPresenter(IProductsView view, ILawnmowerClient lawnmowerClient, IServiceProvider services)
+        public ProductsPresenter(IProductsView view, ILawnmowerClient lawnmowerClient, IOrderClient orderClient, IServiceProvider services)
         {
             _view = view;
             _lawnmowerClient = lawnmowerClient;
+            _orderClient = orderClient;
             _services = services;
 
             _view.AddRequested += OnAdd;
@@ -26,6 +28,7 @@ namespace WinFormsApp.Presenters
             _view.QuitRequested += OnQuitRequested;
             _view.LoadRequested += OnLoadRequested;
             _view.FilterRequested += OnFilterRequested;
+            _view.ViewOrders += OnViewOrders;
         }
 
         private async Task LoadDataAsync()
@@ -98,6 +101,21 @@ namespace WinFormsApp.Presenters
             {
                 _currentBrandFilterId = brandId;
                 LoadDataAsync();
+            }
+        }
+
+        private async void OnViewOrders(object sender, EventArgs e)
+        {
+            var form = (OrdersForm)_services.GetService(typeof(OrdersForm));
+
+            var data = new OrdersDataModel();
+            var orders = await _orderClient.ListAsync();
+            data.Orders = orders;
+            form.Model = data;
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                await LoadDataAsync();
             }
         }
     }

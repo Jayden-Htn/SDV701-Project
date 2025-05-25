@@ -26,6 +26,6 @@ public class OrderRepository : Repository<Order>, IOrderRepository
     /// <returns></returns>
     public virtual IEnumerable<Order> List()
     {
-        return All.ToList();
+        return All.Include(x => x.Product).ThenInclude(x => x.Brand).ToList();
     }
 }

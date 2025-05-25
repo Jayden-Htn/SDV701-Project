@@ -11,6 +11,7 @@ public partial class ProductsForm : Form, IProductsView
     public event EventHandler<int> FilterRequested;
     public event EventHandler<int> EditRequested;
     public event EventHandler<int> DeleteRequested;
+    public event EventHandler ViewOrders;
 
     public ProductsForm()
     {
@@ -30,7 +31,7 @@ public partial class ProductsForm : Form, IProductsView
         }
     }
 
-    private void SetData(ProductsDataModel value) 
+    private void SetData(ProductsDataModel value)
     {
         // Set brand filter
         BrandModel newBrand = new()
@@ -93,5 +94,10 @@ public partial class ProductsForm : Form, IProductsView
     private void OnFormLoad(object sender, EventArgs e)
     {
         LoadRequested?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OrdersButton_Click(object sender, EventArgs e)
+    {
+        ViewOrders?.Invoke(this, EventArgs.Empty);
     }
 }

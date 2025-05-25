@@ -12,6 +12,8 @@ namespace WinFormsApp.Views.Components
         public void SetData(OrderModel order)
         {
             IdLabel.Text = order.Id.ToString();
+            ProductLabel.Text = order.Product.Name;
+            BrandLabel.Text = order.Product.Brand.Name;
             PriceLabel.Text = $"{order.Quantity} per item";
             QuantityLabel.Text = $"x{order.Quantity} items";
             TotalPriceLabel.Text = $"Total: {order.Quantity*order.ItemPrice} items";

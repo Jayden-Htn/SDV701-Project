@@ -96,9 +96,13 @@ public class OrderService : ServiceBase, IOrderService
 
         var config = new MapperConfiguration(cfg =>
         {
+            cfg.CreateMap<Brand, BrandModel>()
+                .ForMember(dest => dest.Lawnmowers, opt => opt.Ignore());
             cfg.CreateMap<Order, OrderModel>();
-            cfg.CreateMap<PushLawnmower, PushLawnmowerModel>();
-            cfg.CreateMap<RideOnLawnmower, RideOnLawnmowerModel>();
+            cfg.CreateMap<PushLawnmower, PushLawnmowerModel>()
+                .ForMember(dest => dest.Orders, opt => opt.Ignore());
+            cfg.CreateMap<RideOnLawnmower, RideOnLawnmowerModel>()
+                .ForMember(dest => dest.Orders, opt => opt.Ignore());
             cfg.CreateMap<PushLawnmower, ILawnmowerModel>().As<PushLawnmowerModel>();
             cfg.CreateMap<RideOnLawnmower, ILawnmowerModel>().As<RideOnLawnmowerModel>();
         });
