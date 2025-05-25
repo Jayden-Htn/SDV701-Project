@@ -1,5 +1,4 @@
-﻿using Models;
-using RestApi.Client;
+﻿using RestApi.Client;
 using WinFormsApp.Models;
 using WinFormsApp.Views;
 
