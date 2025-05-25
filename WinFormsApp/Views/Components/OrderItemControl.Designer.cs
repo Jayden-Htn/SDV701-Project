@@ -141,6 +141,7 @@
             DeleteButton.TabIndex = 10;
             DeleteButton.Text = "Delete";
             DeleteButton.UseVisualStyleBackColor = true;
+            DeleteButton.Click += DeleteButton_Click;
             // 
             // BrandLabel
             // 

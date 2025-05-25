@@ -18,7 +18,7 @@ public class OrdersPresenter
         _orderClient = orderClient;
         _services = services;
 
-        _view.EditRequested += OnEdit;
+        _view.StatusChangeRequested += OnStatusChange;
         _view.DeleteRequested += OnDelete;
         _view.CloseRequested += OnCloseRequested;
         _view.LoadRequested += OnLoadRequested;
@@ -35,14 +35,14 @@ public class OrdersPresenter
         View.Model = model;
     }
 
-    private async void OnEdit(object sender, int id)
+    private async void OnStatusChange(object sender, int id)
     {
         // Can change order status
     }
 
     private async void OnDelete(object sender, int id)
     {
-        _orderClient.DeleteAsync(id);
+        await _orderClient.DeleteAsync(id);
 
         await LoadOrdersAsync();
     }

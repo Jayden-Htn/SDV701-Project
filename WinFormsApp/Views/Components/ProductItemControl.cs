@@ -10,20 +10,20 @@ public partial class ProductItemControl : UserControl, IProductItemView
 
     private LawnmowerModel _model;
 
-    public ProductItemControl()
-    {
-        InitializeComponent();
-
-        EditButton.Click += OnEditButtonClick;
-        DeleteButton.Click += OnDeleteButtonClick;
-    }
-
     public ProductDataModel Model
     {
         set
         {
             SetData(value.Lawnmower);
         }
+    }
+
+    public ProductItemControl()
+    {
+        InitializeComponent();
+
+        EditButton.Click += OnEditButtonClick;
+        DeleteButton.Click += OnDeleteButtonClick;
     }
 
     public void SetData(LawnmowerModel product)
