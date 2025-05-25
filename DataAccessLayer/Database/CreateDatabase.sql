@@ -72,7 +72,7 @@ VALUES
 		'MowGo''s Xtreme is the only ride-on lawnmower you''ll need. Taming any wild lawn will bcome an easy task.');
 
 INSERT INTO [Order] (Quantity, ProductId, TimeCreated, ItemPrice, CustomerName, CustomerEmail, CustomerPhone, Completed)
-VALUES (3, 1, GETDATE(), 5999.99, 'John Doe', 'john.doe@email.com', '1234567890', 1),
+VALUES (3, 1, '2024-01-12 13:23:44', 5999.99, 'John Doe', 'john.doe@email.com', '1234567890', 1),
 	(1, 2, GETDATE(), 449.99, 'John Smith', 'john.smith@email.com', '1234567890', 1),
 	(1, 4, GETDATE(), 3999.99, 'Jane Doe', 'jane.doe@email.com', '1234567890', 0),
 	(5, 2, GETDATE(), 499.99, 'John Doe', 'jane.doe@email.com', '1234567890', 0);

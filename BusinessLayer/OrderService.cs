@@ -92,7 +92,7 @@ public class OrderService : ServiceBase, IOrderService
 
     public IList<OrderModel> List()
     {
-        var orders = UnitOfWork.OrderRepository.List();
+        var orders = UnitOfWork.OrderRepository.List().OrderByDescending(x => x.TimeCreated).ThenBy(x => x.Completed == true);
 
         var config = new MapperConfiguration(cfg =>
         {
