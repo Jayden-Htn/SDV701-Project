@@ -36,7 +36,7 @@ namespace WinFormsApp.Views
                     OrdersPanel.Controls.Add(item);
                 }
 
-                TotalValueLabel.Text = value?.TotalValue.ToString("C");
+                TotalValueLabel.Text = $"Total: {value?.TotalValue.ToString("C")}";
             }
         }
 

@@ -111,6 +111,7 @@ namespace WinFormsApp.Presenters
             var data = new OrdersDataModel();
             var orders = await _orderClient.ListAsync();
             data.Orders = orders;
+            data.TotalValue = orders.Sum(i => i.ItemPrice);
             form.Model = data;
 
             if (form.ShowDialog() == DialogResult.OK)
