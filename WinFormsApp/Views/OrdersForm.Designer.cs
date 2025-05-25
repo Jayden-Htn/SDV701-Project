@@ -37,6 +37,7 @@
             label5 = new Label();
             label6 = new Label();
             TotalValueLabel = new Label();
+            label7 = new Label();
             SuspendLayout();
             // 
             // OrdersPanel
@@ -85,9 +86,9 @@
             label3.Font = new Font("Segoe UI Semibold", 8.861538F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.Location = new Point(47, 143);
             label3.Name = "label3";
-            label3.Size = new Size(44, 21);
+            label3.Size = new Size(26, 21);
             label3.TabIndex = 12;
-            label3.Text = "Item";
+            label3.Text = "ID";
             // 
             // label4
             // 
@@ -132,11 +133,22 @@
             TotalValueLabel.Text = "Total Value";
             TotalValueLabel.TextAlign = ContentAlignment.TopRight;
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Semibold", 8.861538F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.Location = new Point(97, 143);
+            label7.Name = "label7";
+            label7.Size = new Size(44, 21);
+            label7.TabIndex = 19;
+            label7.Text = "Item";
+            // 
             // OrdersForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(978, 546);
+            Controls.Add(label7);
             Controls.Add(TotalValueLabel);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -163,5 +175,6 @@
         private Label label5;
         private Label label6;
         private Label TotalValueLabel;
+        private Label label7;
     }
 }

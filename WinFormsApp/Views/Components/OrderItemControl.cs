@@ -14,9 +14,9 @@ namespace WinFormsApp.Views.Components
             IdLabel.Text = order.Id.ToString();
             ProductLabel.Text = order.Product.Name;
             BrandLabel.Text = order.Product.Brand.Name;
-            PriceLabel.Text = $"{order.Quantity} per item";
+            PriceLabel.Text = $"{order.ItemPrice.ToString("C")} per item";
             QuantityLabel.Text = $"x{order.Quantity} items";
-            TotalPriceLabel.Text = $"Total: {order.Quantity*order.ItemPrice} items";
+            TotalPriceLabel.Text = $"Total: {(order.Quantity*order.ItemPrice).ToString("C")}";
             CustomerNameLabel.Text = order.CustomerName;
             CustomerEmailLabel.Text = order.CustomerEmail;
             CustomerPhoneLabel.Text = order.CustomerPhone;

@@ -32,7 +32,7 @@ public partial class ProductItemControl : UserControl, IProductItemView
 
         NameLabel.Text = product.Name;
         DescriptionLabel.Text = product.Description;
-        PriceLabel.Text = $"${product.Price}";
+        PriceLabel.Text = $"{product.Price.ToString("C")}";
         StockLabel.Text = $"{product.QuantityInStock} available";
         BrandLabel.Text = product.Brand.Name;
         TypeLabel.Text = product.Type;
