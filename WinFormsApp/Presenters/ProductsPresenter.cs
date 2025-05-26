@@ -52,30 +52,31 @@ namespace WinFormsApp.Presenters
 
         private async void OnAdd(object sender, EventArgs e)
         {
-            var form = (ProductForm)_services.GetService(typeof(ProductForm));
-            var data = new ProductDataModel();
-            data.Lawnmower = new LawnmowerModel();
-            form.Model = data;
+            //var form = (ProductForm)_services.GetService(typeof(ProductForm));
+            //var data = new ProductDataModel();
+            //data.Lawnmower = new LawnmowerModel();
+            //form.Model = data;
 
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                await _lawnmowerClient.AddAsync(form.GetData());
-                await LoadDataAsync();
-            }
+            //if (form.ShowDialog() == DialogResult.OK)
+            //{
+            //    await _lawnmowerClient.AddAsync(form.GetData());
+            //    await LoadDataAsync();
+            //}
         }
 
-        private async void OnEdit(object sender, int id)
+        private async void OnEdit(object sender, ILawnmowerModel model)
         {
-            var form = (ProductForm)_services.GetService(typeof(ProductForm));
-            var lawnmower = await _lawnmowerClient.GetAsync(id);
+            var presenter = _services.GetRequiredService<ProductPresenter>();
+            var form = (ProductForm)presenter.View;
 
+            var lawnmower = await _lawnmowerClient.GetAsync(model.Id, model.Type);
             var data = new ProductDataModel();
             data.Lawnmower = lawnmower;
+            data.Brands = _brands;
             form.Model = data;
 
             if (form.ShowDialog() == DialogResult.OK)
             {
-                await _lawnmowerClient.AddAsync(form.GetData());
                 await LoadDataAsync();
             }
         }

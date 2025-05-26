@@ -5,10 +5,10 @@ namespace WinFormsApp.Views;
 
 public partial class ProductItemControl : UserControl, IProductItemView
 {
-    public event EventHandler<int> EditRequested;
+    public event EventHandler<ILawnmowerModel> EditRequested;
     public event EventHandler<int> DeleteRequested;
 
-    private LawnmowerModel _model;
+    private ILawnmowerModel _model;
 
     public ProductDataModel Model
     {
@@ -26,7 +26,7 @@ public partial class ProductItemControl : UserControl, IProductItemView
         DeleteButton.Click += OnDeleteButtonClick;
     }
 
-    public void SetData(LawnmowerModel product)
+    public void SetData(ILawnmowerModel product)
     {
         _model = product;
 
@@ -45,7 +45,7 @@ public partial class ProductItemControl : UserControl, IProductItemView
 
     public void OnEditButtonClick(object sender, EventArgs e)
     {
-        EditRequested?.Invoke(this, _model.Id);
+        EditRequested?.Invoke(this, _model);
     }
 
     public void OnDeleteButtonClick(object sender, EventArgs e)

@@ -4,5 +4,6 @@ namespace WinFormsApp.Models;
 
 public class ProductDataModel
 {
-    public LawnmowerModel Lawnmower { get; set; }
+    public ILawnmowerModel Lawnmower { get; set; }
+    public IList<BrandModel> Brands { get; set; }
 }

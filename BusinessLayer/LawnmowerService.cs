@@ -17,18 +17,25 @@ public class LawnmowerService : ServiceBase, ILawnmowerService
         var config = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<Order, OrderModel>();
+            cfg.CreateMap<Lawnmower, LawnmowerModel>();
             cfg.CreateMap<PushLawnmower, PushLawnmowerModel>();
             cfg.CreateMap<RideOnLawnmower, RideOnLawnmowerModel>();
-            cfg.CreateMap<PushLawnmower, ILawnmowerModel>().As<PushLawnmowerModel>();
-            cfg.CreateMap<RideOnLawnmower, ILawnmowerModel>().As<RideOnLawnmowerModel>();
         });
         IMapper mapper = new Mapper(config);
 
-        var model = new LawnmowerModel();
+        if (lawnmower is PushLawnmower)
+        {
+            return mapper.Map(lawnmower, new PushLawnmowerModel());
+        } 
+        else if (lawnmower is RideOnLawnmower)
+        {
+            return mapper.Map(lawnmower, new RideOnLawnmowerModel());
+        }
+        else
+        {
+            return mapper.Map(lawnmower, new LawnmowerModel());
+        }
 
-        mapper.Map(lawnmower, model);
-
-        return model;
     }
 
     public int Add(LawnmowerModel model)

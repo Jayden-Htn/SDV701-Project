@@ -1,4 +1,5 @@
 ﻿using Models;
+using System.Text.Json;
 
 namespace RestApi.Client;
 
@@ -9,9 +10,20 @@ public class LawnmowerClient : ClientBase, ILawnmowerClient
 
     }
 
-    public async Task<LawnmowerModel> GetAsync(int id)
+    public async Task<ILawnmowerModel> GetAsync(int id, string type)
     {
-        return await GetAsync<LawnmowerModel>($"/api/lawnmower/{id}");
+        if (type == "RideOn")
+        {
+            return await GetAsync<RideOnLawnmowerModel>($"/api/lawnmower/{id}");
+        }
+        else if (type == "Push")
+        {
+            return await GetAsync<PushLawnmowerModel>($"/api/lawnmower/{id}");
+        }
+        else
+        {
+            return await GetAsync<LawnmowerModel>($"/api/lawnmower/{id}");
+        }
     }
 
     public async Task<IList<LawnmowerModel>> ListAsync(int brandId)

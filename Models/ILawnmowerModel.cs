@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-
-namespace Models;
+﻿namespace Models;
 
 public interface ILawnmowerModel
 {
@@ -15,6 +12,7 @@ public interface ILawnmowerModel
     public string? Photo { get; set; }
     public string FuelDetails { get; set; }
     public DateTime LastUpdated { get; set; }
+    public string Type { get; set; }
     public BrandModel Brand { get; set; }
     public ICollection<OrderModel>? Orders { get; set; }
 }

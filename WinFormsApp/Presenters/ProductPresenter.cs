@@ -1,4 +1,5 @@
-﻿using RestApi.Client;
+﻿using Models;
+using RestApi.Client;
 using WinFormsApp.Models;
 using WinFormsApp.Views;
 
@@ -9,6 +10,10 @@ public class ProductPresenter
     readonly IProductView _view;
     readonly ILawnmowerClient _lawnmowerClient;
     readonly IServiceProvider _services;
+
+    IList<BrandModel> _brands;
+
+    public IProductView View => _view;
 
     public ProductPresenter(IProductView view, ILawnmowerClient lawnmowerClient, IServiceProvider services)
     {
@@ -25,12 +30,19 @@ public class ProductPresenter
 
     private async Task LoadLawnmowerAsync()
     {
-        var lawnmower = await _lawnmowerClient.GetAsync(_view.Model.Lawnmower.Id);
+        var oldModel = _view.Model.Lawnmower;
+        var lawnmower = await _lawnmowerClient.GetAsync(oldModel.Id, oldModel.Type);
+
+        if (_brands == null)
+        {
+            _brands = await _lawnmowerClient.ListBrandsAsync();
+        }
 
         var model = new ProductDataModel();
         model.Lawnmower = lawnmower;
+        model.Brands = _brands.ToList();
 
-        _view.Model = model;
+        View.Model = model;
     }
 
     private async void OnAdd(object sender, EventArgs e)
@@ -67,7 +79,7 @@ public class ProductPresenter
 
     private void OnQuitRequested(object? sender, EventArgs e)
     {
-        _view.Close();
+        View.Close();
     }
 
     private async void OnLoadRequested(object? sender, EventArgs e)

@@ -9,7 +9,7 @@ public partial class ProductsForm : Form, IProductsView
     public event EventHandler QuitRequested;
     public event EventHandler LoadRequested;
     public event EventHandler<int> FilterRequested;
-    public event EventHandler<int> EditRequested;
+    public event EventHandler<ILawnmowerModel> EditRequested;
     public event EventHandler<int> DeleteRequested;
     public event EventHandler ViewOrders;
 
@@ -49,7 +49,7 @@ public partial class ProductsForm : Form, IProductsView
         FilterCombo.Items.AddRange(brands);
         FilterCombo.DisplayMember = "Name";
         FilterCombo.ValueMember = "Id";
-        FilterCombo.SelectedIndex = value.CurrentBrandId;
+        FilterCombo.SelectedIndex = value.CurrentBrandId; // Should fix id/index being used interchangeably
 
         // Set products
         ProductsPanel.Controls.Clear();
@@ -59,9 +59,9 @@ public partial class ProductsForm : Form, IProductsView
             var item = new ProductItemControl();
             item.SetData(product);
 
-            item.EditRequested += (obj, id) =>
+            item.EditRequested += (obj, model) =>
             {
-                EditRequested?.Invoke(this, id);
+                EditRequested?.Invoke(this, model);
             };
             item.DeleteRequested += (obj, id) =>
             {

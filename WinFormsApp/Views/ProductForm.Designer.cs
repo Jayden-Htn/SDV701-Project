@@ -33,12 +33,10 @@
             SaveButton = new Button();
             CloseButton = new Button();
             NameInput = new TextBox();
-            PriceInput = new TextBox();
-            textBox6 = new TextBox();
             FuelDetailsInput = new TextBox();
             label3 = new Label();
             LastUpdatedLabel = new Label();
-            TypeFieldLabel = new Label();
+            TypeSpecificLabel = new Label();
             label6 = new Label();
             label7 = new Label();
             label8 = new Label();
@@ -46,14 +44,18 @@
             label10 = new Label();
             StockNumeric = new NumericUpDown();
             BrandCombo = new ComboBox();
-            TypeCombo = new ComboBox();
             label4 = new Label();
-            textBox1 = new TextBox();
+            DescriptionInput = new TextBox();
             pictureBox1 = new PictureBox();
             AddImageButton = new Button();
             DeleteImageButton = new Button();
+            PriceNumeric = new NumericUpDown();
+            TypeInput = new TextBox();
+            TypeSpecificNumeric = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)StockNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PriceNumeric).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)TypeSpecificNumeric).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -103,23 +105,9 @@
             NameInput.Size = new Size(279, 29);
             NameInput.TabIndex = 6;
             // 
-            // PriceInput
-            // 
-            PriceInput.Location = new Point(25, 213);
-            PriceInput.Name = "PriceInput";
-            PriceInput.Size = new Size(279, 29);
-            PriceInput.TabIndex = 7;
-            // 
-            // textBox6
-            // 
-            textBox6.Location = new Point(23, 519);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(281, 29);
-            textBox6.TabIndex = 11;
-            // 
             // FuelDetailsInput
             // 
-            FuelDetailsInput.Location = new Point(23, 457);
+            FuelDetailsInput.Location = new Point(25, 335);
             FuelDetailsInput.Name = "FuelDetailsInput";
             FuelDetailsInput.Size = new Size(281, 29);
             FuelDetailsInput.TabIndex = 12;
@@ -144,21 +132,21 @@
             LastUpdatedLabel.TabIndex = 14;
             LastUpdatedLabel.Text = "Last Updated";
             // 
-            // TypeFieldLabel
+            // TypeSpecificLabel
             // 
-            TypeFieldLabel.AutoSize = true;
-            TypeFieldLabel.Font = new Font("Segoe UI", 7.753846F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TypeFieldLabel.Location = new Point(25, 497);
-            TypeFieldLabel.Name = "TypeFieldLabel";
-            TypeFieldLabel.Size = new Size(97, 19);
-            TypeFieldLabel.TabIndex = 15;
-            TypeFieldLabel.Text = "TypeFieldLabel";
+            TypeSpecificLabel.AutoSize = true;
+            TypeSpecificLabel.Font = new Font("Segoe UI", 7.753846F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TypeSpecificLabel.Location = new Point(25, 497);
+            TypeSpecificLabel.Name = "TypeSpecificLabel";
+            TypeSpecificLabel.Size = new Size(97, 19);
+            TypeSpecificLabel.TabIndex = 15;
+            TypeSpecificLabel.Text = "TypeFieldLabel";
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 7.753846F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(25, 435);
+            label6.Location = new Point(25, 313);
             label6.Name = "label6";
             label6.Size = new Size(79, 19);
             label6.TabIndex = 16;
@@ -168,7 +156,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 7.753846F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(25, 374);
+            label7.Location = new Point(25, 435);
             label7.Name = "label7";
             label7.Size = new Size(37, 19);
             label7.TabIndex = 17;
@@ -178,7 +166,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 7.753846F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(25, 313);
+            label8.Location = new Point(25, 374);
             label8.Name = "label8";
             label8.Size = new Size(45, 19);
             label8.TabIndex = 18;
@@ -208,24 +196,16 @@
             // 
             StockNumeric.Location = new Point(25, 274);
             StockNumeric.Name = "StockNumeric";
-            StockNumeric.Size = new Size(100, 29);
+            StockNumeric.Size = new Size(133, 29);
             StockNumeric.TabIndex = 21;
             // 
             // BrandCombo
             // 
             BrandCombo.FormattingEnabled = true;
-            BrandCombo.Location = new Point(25, 335);
+            BrandCombo.Location = new Point(23, 396);
             BrandCombo.Name = "BrandCombo";
             BrandCombo.Size = new Size(279, 29);
             BrandCombo.TabIndex = 22;
-            // 
-            // TypeCombo
-            // 
-            TypeCombo.FormattingEnabled = true;
-            TypeCombo.Location = new Point(25, 396);
-            TypeCombo.Name = "TypeCombo";
-            TypeCombo.Size = new Size(279, 29);
-            TypeCombo.TabIndex = 23;
             // 
             // label4
             // 
@@ -237,13 +217,13 @@
             label4.TabIndex = 24;
             label4.Text = "Description";
             // 
-            // textBox1
+            // DescriptionInput
             // 
-            textBox1.Location = new Point(530, 152);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(375, 212);
-            textBox1.TabIndex = 25;
+            DescriptionInput.Location = new Point(530, 152);
+            DescriptionInput.Multiline = true;
+            DescriptionInput.Name = "DescriptionInput";
+            DescriptionInput.Size = new Size(375, 212);
+            DescriptionInput.TabIndex = 25;
             // 
             // pictureBox1
             // 
@@ -272,17 +252,44 @@
             DeleteImageButton.Text = "Remove";
             DeleteImageButton.UseVisualStyleBackColor = true;
             // 
+            // PriceNumeric
+            // 
+            PriceNumeric.DecimalPlaces = 2;
+            PriceNumeric.Location = new Point(25, 213);
+            PriceNumeric.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            PriceNumeric.Name = "PriceNumeric";
+            PriceNumeric.Size = new Size(133, 29);
+            PriceNumeric.TabIndex = 29;
+            // 
+            // TypeInput
+            // 
+            TypeInput.Location = new Point(23, 457);
+            TypeInput.Name = "TypeInput";
+            TypeInput.ReadOnly = true;
+            TypeInput.Size = new Size(281, 29);
+            TypeInput.TabIndex = 30;
+            TypeInput.UseWaitCursor = true;
+            // 
+            // TypeSpecificNumeric
+            // 
+            TypeSpecificNumeric.Location = new Point(25, 521);
+            TypeSpecificNumeric.Name = "TypeSpecificNumeric";
+            TypeSpecificNumeric.Size = new Size(133, 29);
+            TypeSpecificNumeric.TabIndex = 31;
+            // 
             // ProductForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(934, 616);
+            Controls.Add(TypeSpecificNumeric);
+            Controls.Add(TypeInput);
+            Controls.Add(PriceNumeric);
             Controls.Add(AddImageButton);
             Controls.Add(DeleteImageButton);
             Controls.Add(pictureBox1);
-            Controls.Add(textBox1);
+            Controls.Add(DescriptionInput);
             Controls.Add(label4);
-            Controls.Add(TypeCombo);
             Controls.Add(BrandCombo);
             Controls.Add(StockNumeric);
             Controls.Add(label10);
@@ -290,12 +297,10 @@
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(label6);
-            Controls.Add(TypeFieldLabel);
+            Controls.Add(TypeSpecificLabel);
             Controls.Add(LastUpdatedLabel);
             Controls.Add(label3);
             Controls.Add(FuelDetailsInput);
-            Controls.Add(textBox6);
-            Controls.Add(PriceInput);
             Controls.Add(NameInput);
             Controls.Add(SaveButton);
             Controls.Add(CloseButton);
@@ -305,6 +310,8 @@
             Text = "ProductForm";
             ((System.ComponentModel.ISupportInitialize)StockNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PriceNumeric).EndInit();
+            ((System.ComponentModel.ISupportInitialize)TypeSpecificNumeric).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -316,12 +323,10 @@
         private Button SaveButton;
         private Button CloseButton;
         private TextBox NameInput;
-        private TextBox PriceInput;
-        private TextBox textBox6;
         private TextBox FuelDetailsInput;
         private Label label3;
         private Label LastUpdatedLabel;
-        private Label TypeFieldLabel;
+        private Label TypeSpecificLabel;
         private Label label6;
         private Label label7;
         private Label label8;
@@ -329,11 +334,13 @@
         private Label label10;
         private NumericUpDown StockNumeric;
         private ComboBox BrandCombo;
-        private ComboBox TypeCombo;
         private Label label4;
-        private TextBox textBox1;
+        private TextBox DescriptionInput;
         private PictureBox pictureBox1;
         private Button AddImageButton;
         private Button DeleteImageButton;
+        private NumericUpDown PriceNumeric;
+        private TextBox TypeInput;
+        private NumericUpDown TypeSpecificNumeric;
     }
 }

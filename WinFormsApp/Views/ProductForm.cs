@@ -11,6 +11,8 @@ namespace WinFormsApp.Views
         public event EventHandler QuitRequested;
         public event EventHandler LoadRequested;
 
+        private ProductDataModel _model;
+
         public ProductForm()
         {
             InitializeComponent();
@@ -24,20 +26,49 @@ namespace WinFormsApp.Views
         {
             set
             {
-                var product = value.Lawnmower;
-                NameInput.Text = product.Name;
-                PriceInput.Text = product.Price.ToString();
-                StockNumeric.Value = product.QuantityInStock;
-                BrandCombo.Items.Clear();
-                // BrandCombo.Items = new List<string>() { "Tooler", "MowGo" }; // Ideally get from db
-                TypeCombo.Items.Clear();
-                // TypeCombo.Items = new List<string>() { "Push", "Ride On" }; // Ideally get from db
-                FuelDetailsInput.Text = product.FuelDetails;
-                LastUpdatedLabel.Text = product.LastUpdated.ToString();
-
-                // Need to handle type specific field
+                _model = value;
+                SetData(value);
+                
             }
-            get { return Model; }
+            get { return _model; }
+        }
+
+        private void SetData(ProductDataModel value)
+        {
+            var product = value.Lawnmower;
+            NameInput.Text = product.Name;
+            DescriptionInput.Text = product.Description;
+            PriceNumeric.Value = product.Price;
+            StockNumeric.Value = product.QuantityInStock;            
+            FuelDetailsInput.Text = product.FuelDetails;
+            LastUpdatedLabel.Text = product.LastUpdated.ToString();
+
+            TypeInput.Text = product.Type;
+
+            BrandCombo.DataSource = null;
+            BrandCombo.DataSource = value.Brands;
+            BrandCombo.DisplayMember = "Name";
+            BrandCombo.ValueMember = "Id";
+            if (product.BrandId != 0)
+            {
+                BrandCombo.SelectedValue = product.BrandId;
+            }
+
+            if (product.Type == "RideOn")
+            {
+                TypeSpecificLabel.Text = "Max Speed (km/h)";
+                TypeSpecificNumeric.Value = (product as RideOnLawnmowerModel).TopSpeed;
+            }
+            else if (product.Type == "Push")
+            {
+                TypeSpecificLabel.Text = "Weight (kg)";
+                TypeSpecificNumeric.Value = (product as PushLawnmowerModel).Weight; ;
+            }
+            else
+            {
+                TypeSpecificLabel.Text = "";
+                TypeSpecificNumeric.Value = 0;
+            }
         }
 
         private void OnSaveButtonClick(object sender, EventArgs e)
@@ -53,7 +84,7 @@ namespace WinFormsApp.Views
         public LawnmowerModel GetData()
         {
             LawnmowerModel product;
-            if (TypeCombo.SelectedText == "Push")
+            if (TypeInput.SelectedText == "Push")
             {
                 product = new PushLawnmowerModel();
             } else
@@ -62,7 +93,7 @@ namespace WinFormsApp.Views
             }
 
             product.Name = NameInput.Text;
-            product.Price = Convert.ToDecimal(PriceInput.Text);
+            product.Price = Convert.ToDecimal(PriceNumeric.Value);
             product.QuantityInStock = (int)StockNumeric.Value;
             product.BrandId = BrandCombo.SelectedIndex + 1;
             product.FuelDetails = FuelDetailsInput.Text;
