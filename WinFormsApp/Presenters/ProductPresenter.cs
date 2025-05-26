@@ -24,7 +24,7 @@ public class ProductPresenter
         _view.AddRequested += OnAdd;
         _view.EditRequested += OnEdit;
         _view.DeleteRequested += OnDelete;
-        _view.QuitRequested += OnQuitRequested;
+        _view.CloseRequested += OnCloseRequested;
         _view.LoadRequested += OnLoadRequested;
     }
 
@@ -77,7 +77,7 @@ public class ProductPresenter
         await LoadLawnmowerAsync();
     }
 
-    private void OnQuitRequested(object? sender, EventArgs e)
+    private void OnCloseRequested(object? sender, EventArgs e)
     {
         View.Close();
     }

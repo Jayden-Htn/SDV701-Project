@@ -9,7 +9,7 @@ public interface IProductView
     public event EventHandler AddRequested;
     public event EventHandler<int> EditRequested;
     public event EventHandler<int> DeleteRequested;
-    public event EventHandler QuitRequested;
+    public event EventHandler CloseRequested;
     public event EventHandler LoadRequested;
 
     void Close();
