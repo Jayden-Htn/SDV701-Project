@@ -21,9 +21,7 @@ public class ProductPresenter
         _lawnmowerClient = lawnmowerClient;
         _services = services;
 
-        _view.AddRequested += OnAdd;
-        _view.EditRequested += OnEdit;
-        _view.DeleteRequested += OnDelete;
+        _view.SaveRequested += OnSave;
         _view.CloseRequested += OnCloseRequested;
         _view.LoadRequested += OnLoadRequested;
     }
@@ -45,36 +43,19 @@ public class ProductPresenter
         View.Model = model;
     }
 
-    private async void OnAdd(object sender, EventArgs e)
+    private async void OnSave(object sender, ILawnmowerModel model)
     {
-        //var form = (ProductForm)_services.GetService(typeof(ProductForm));
-        //form.SetDetails(new LawnmowerModel());
-
-        //if (form.ShowDialog() == DialogResult.OK)
-        //{
-        //    await _lawnmowerClient.AddAsync(form.GetDetails());
-        //    await LoadLawnmowerAsync();
-        //}
-    }
-
-    private async void OnEdit(object sender, int id)
-    {
-        //var lawnmower = await _lawnmowerClient.GetAsync(id);
-
-        //var form = (ProductForm)_services.GetService(typeof(ProductForm));
-        //form.SetDetails(lawnmower);
-
-        //if (form.ShowDialog() == DialogResult.OK)
-        //{
-        //    await _lawnmowerClient.AddAsync(form.GetDetails());
-        //    await LoadLawnmowerAsync();
-        //}
-    }
-
-    private async void OnDelete(object sender, int id)
-    {
-        await _lawnmowerClient.DeleteAsync(id);
-        await LoadLawnmowerAsync();
+        if (model.Id == 0)
+        {
+            // Create
+            await _lawnmowerClient.AddAsync(model); 
+        }
+        else
+        {
+            // Update
+            await _lawnmowerClient.UpdateAsync(model);
+        }
+        View.Close();
     }
 
     private void OnCloseRequested(object? sender, EventArgs e)

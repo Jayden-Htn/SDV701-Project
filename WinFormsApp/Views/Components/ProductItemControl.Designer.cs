@@ -115,7 +115,7 @@
             // 
             // DeleteButton
             // 
-            DeleteButton.Location = new Point(655, 74);
+            DeleteButton.Location = new Point(655, 59);
             DeleteButton.Name = "DeleteButton";
             DeleteButton.Size = new Size(102, 31);
             DeleteButton.TabIndex = 8;

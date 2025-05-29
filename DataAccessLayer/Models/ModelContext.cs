@@ -31,7 +31,7 @@ public partial class ModelContext : DbContext
             entity.Property(e => e.Description).IsRequired().HasMaxLength(255);
             entity.Property(e => e.Price).HasColumnType("decimal(8, 2)");
             entity.Property(e => e.QuantityInStock);
-            entity.Property(e => e.Photo).HasColumnType("blob");
+            entity.Property(e => e.Photo).HasColumnType("image");
             entity.Property(e => e.FuelDetails);
             entity.Property(e => e.LastUpdated).HasColumnType("datetime");
             entity.Property(e => e.BrandId);

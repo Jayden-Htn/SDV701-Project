@@ -5,7 +5,7 @@ namespace WinFormsApp.Views
 {
     public partial class ProductForm : Form, IProductView
     {
-        public event EventHandler AddRequested;
+        public event EventHandler<ILawnmowerModel> SaveRequested;
         public event EventHandler<int> EditRequested;
         public event EventHandler<int> DeleteRequested;
         public event EventHandler CloseRequested;
@@ -41,7 +41,7 @@ namespace WinFormsApp.Views
             PriceNumeric.Value = product.Price;
             StockNumeric.Value = product.QuantityInStock;            
             FuelDetailsInput.Text = product.FuelDetails;
-            LastUpdatedLabel.Text = product.LastUpdated.ToString();
+            LastUpdatedLabel.Text = $"Last updated: {product.LastUpdated.ToString()}";
 
             TypeInput.Text = product.Type;
 
@@ -73,7 +73,7 @@ namespace WinFormsApp.Views
 
         private void OnSaveButtonClick(object sender, EventArgs e)
         {
-            AddRequested?.Invoke(this, EventArgs.Empty);
+            SaveRequested?.Invoke(this, GetData());
         }
 
         private void OnCloseButtonClick(object sender, EventArgs e)
@@ -81,23 +81,39 @@ namespace WinFormsApp.Views
             CloseRequested?.Invoke(this, EventArgs.Empty);
         }
 
-        public LawnmowerModel GetData()
+        public ILawnmowerModel GetData()
         {
-            LawnmowerModel product;
-            if (TypeInput.SelectedText == "Push")
+            ILawnmowerModel product;
+            if (TypeInput.Text == "Push")
             {
-                product = new PushLawnmowerModel();
-            } else
+                var prod = new PushLawnmowerModel();
+                prod.Weight = (int)TypeSpecificNumeric.Value;
+                product = prod;
+
+            } 
+            else if (TypeInput.Text == "RideOn")
             {
-                product = new RideOnLawnmowerModel();
+                var prod = new RideOnLawnmowerModel();
+                prod.TopSpeed = (int)TypeSpecificNumeric.Value;
+                product = prod;
+            }
+            else
+            {
+                product = new LawnmowerModel();
             }
 
+            product.Id = _model.Lawnmower.Id;
             product.Name = NameInput.Text;
+            product.Description = DescriptionInput.Text;
+            product.BrandId = (int)BrandCombo.SelectedValue;
+            product.Brand= (BrandModel)BrandCombo.SelectedItem;
             product.Price = Convert.ToDecimal(PriceNumeric.Value);
             product.QuantityInStock = (int)StockNumeric.Value;
-            product.BrandId = BrandCombo.SelectedIndex + 1;
+            product.Photo = null;
             product.FuelDetails = FuelDetailsInput.Text;
+            product.Type = TypeInput.Text;
             product.LastUpdated = DateTime.Now;
+
             return product;
         }
 

@@ -34,22 +34,25 @@ public partial class ProductsForm : Form, IProductsView
     private void SetData(ProductsDataModel value)
     {
         // Set brand filter
-        BrandModel newBrand = new()
-        {
-            Id = 0,
-            Name = "All",
-            Description = "View every lawnmower we have in stock."
-        };
-
-        BrandModel[] brands = new[] { newBrand }
-            .Concat(value.Brands)
-            .ToArray();
-
         FilterCombo.Items.Clear();
-        FilterCombo.Items.AddRange(brands);
-        FilterCombo.DisplayMember = "Name";
-        FilterCombo.ValueMember = "Id";
-        FilterCombo.SelectedIndex = value.CurrentBrandId; // Should fix id/index being used interchangeably
+        if (value.Brands != null)
+        {
+            BrandModel newBrand = new()
+            {
+                Id = 0,
+                Name = "All",
+                Description = "View every lawnmower we have in stock."
+            };
+
+            BrandModel[] brands = new[] { newBrand }
+                .Concat(value.Brands)
+                .ToArray();
+
+            FilterCombo.Items.AddRange(brands);
+            FilterCombo.DisplayMember = "Name";
+            FilterCombo.ValueMember = "Id";
+            FilterCombo.SelectedIndex = value.CurrentBrandId; // Should fix id/index being used interchangeably
+        }
 
         // Set products
         ProductsPanel.Controls.Clear();

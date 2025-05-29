@@ -36,4 +36,28 @@ public class LawnmowerRepository : Repository<Lawnmower>, ILawnmowerRepository
     {
         return All.Select(l => l.Brand).Distinct().ToList();
     }
+
+    /// <summary>
+    /// Adds an entity to the context and sets the entity state to <see cref="EntityState.Added" />.
+    /// Entities with the added stste will be inserted in the database when SaveChanges() is called.
+    /// </summary>
+    /// <param name="instance"></param>
+    public virtual void Add(ILawnmower instance)
+    {
+        if (instance != null)
+        {
+            if (instance is PushLawnmower)
+            {
+                Context.Set<PushLawnmower>().Add((PushLawnmower)instance);
+            }
+            else if (instance is RideOnLawnmower)
+            {
+                Context.Set<RideOnLawnmower>().Add((RideOnLawnmower)instance);
+            }
+            else
+            {
+                Context.Set<Lawnmower>().Add((Lawnmower)instance);
+            }
+        }
+    }
 }

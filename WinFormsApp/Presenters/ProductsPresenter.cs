@@ -41,7 +41,6 @@ namespace WinFormsApp.Presenters
                 _brands = await _lawnmowerClient.ListBrandsAsync();
             }
             
-
             var model = new ProductsDataModel();
             model.Lawnmowers = lawnmowers.ToList();
             model.Brands = _brands.ToList();
@@ -77,6 +76,7 @@ namespace WinFormsApp.Presenters
 
             if (form.ShowDialog() == DialogResult.OK)
             {
+                Thread.Sleep(200); // Otherwise save hasn't finished and gets old data
                 await LoadDataAsync();
             }
         }

@@ -46,14 +46,14 @@
             BrandCombo = new ComboBox();
             label4 = new Label();
             DescriptionInput = new TextBox();
-            pictureBox1 = new PictureBox();
+            ImageBox = new PictureBox();
             AddImageButton = new Button();
             DeleteImageButton = new Button();
             PriceNumeric = new NumericUpDown();
             TypeInput = new TextBox();
             TypeSpecificNumeric = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)StockNumeric).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ImageBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PriceNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TypeSpecificNumeric).BeginInit();
             SuspendLayout();
@@ -80,6 +80,7 @@
             // 
             // SaveButton
             // 
+            SaveButton.DialogResult = DialogResult.OK;
             SaveButton.Location = new Point(803, 62);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(102, 31);
@@ -90,6 +91,7 @@
             // 
             // CloseButton
             // 
+            CloseButton.DialogResult = DialogResult.Cancel;
             CloseButton.Location = new Point(803, 25);
             CloseButton.Name = "CloseButton";
             CloseButton.Size = new Size(102, 31);
@@ -225,14 +227,14 @@
             DescriptionInput.Size = new Size(375, 212);
             DescriptionInput.TabIndex = 25;
             // 
-            // pictureBox1
+            // ImageBox
             // 
-            pictureBox1.BackColor = SystemColors.ControlDarkDark;
-            pictureBox1.Location = new Point(738, 386);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(164, 164);
-            pictureBox1.TabIndex = 26;
-            pictureBox1.TabStop = false;
+            ImageBox.BackColor = SystemColors.ControlDarkDark;
+            ImageBox.Location = new Point(738, 386);
+            ImageBox.Name = "ImageBox";
+            ImageBox.Size = new Size(164, 164);
+            ImageBox.TabIndex = 26;
+            ImageBox.TabStop = false;
             // 
             // AddImageButton
             // 
@@ -287,7 +289,7 @@
             Controls.Add(PriceNumeric);
             Controls.Add(AddImageButton);
             Controls.Add(DeleteImageButton);
-            Controls.Add(pictureBox1);
+            Controls.Add(ImageBox);
             Controls.Add(DescriptionInput);
             Controls.Add(label4);
             Controls.Add(BrandCombo);
@@ -309,7 +311,7 @@
             Name = "ProductForm";
             Text = "ProductForm";
             ((System.ComponentModel.ISupportInitialize)StockNumeric).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ImageBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)PriceNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)TypeSpecificNumeric).EndInit();
             ResumeLayout(false);
@@ -336,7 +338,7 @@
         private ComboBox BrandCombo;
         private Label label4;
         private TextBox DescriptionInput;
-        private PictureBox pictureBox1;
+        private PictureBox ImageBox;
         private Button AddImageButton;
         private Button DeleteImageButton;
         private NumericUpDown PriceNumeric;

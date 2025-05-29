@@ -38,23 +38,38 @@ public class LawnmowerService : ServiceBase, ILawnmowerService
 
     }
 
-    public int Add(LawnmowerModel model)
+    public int Add(ILawnmowerModel model)
     {
         Validate(model);
 
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<OrderModel, Order>();
-            cfg.CreateMap<PushLawnmowerModel, PushLawnmower>();
-            cfg.CreateMap<RideOnLawnmowerModel, RideOnLawnmower>();
+            cfg.CreateMap<PushLawnmowerModel, PushLawnmower>()
+                .ForMember(l => l.Brand, t => t.Ignore())
+                .ForMember(l => l.Orders, t => t.Ignore());
+            cfg.CreateMap<RideOnLawnmowerModel, RideOnLawnmower>()
+                .ForMember(l => l.Brand, t => t.Ignore())
+                .ForMember(l => l.Orders, t => t.Ignore());
+            cfg.CreateMap<LawnmowerModel, Lawnmower>();
             cfg.CreateMap<ILawnmowerModel, Lawnmower>()
-                    .Include<PushLawnmowerModel, PushLawnmower>()
-                    .Include<RideOnLawnmowerModel, RideOnLawnmower>();
+                .Include<PushLawnmowerModel, PushLawnmower>()
+                .Include<RideOnLawnmowerModel, RideOnLawnmower>();
         });
-
         IMapper mapper = new Mapper(config);
 
-        var data = new Lawnmower();
+        ILawnmower data;
+        if (model is PushLawnmowerModel)
+        {
+            data = new PushLawnmower();
+        }
+        else if (model is RideOnLawnmowerModel)
+        {
+            data = new RideOnLawnmower();
+        }
+        else
+        {
+            data = new Lawnmower();
+        }
 
         mapper.Map(model, data);
 
@@ -64,13 +79,23 @@ public class LawnmowerService : ServiceBase, ILawnmowerService
         return data.Id;
     }
 
-    public int Update(LawnmowerModel model)
+    public int Update(ILawnmowerModel model)
     {
         Validate(model);
 
-        var config = new MapperConfiguration(cfg => cfg.CreateMap<LawnmowerModel, Lawnmower>()
-        .ForMember(x => x.Brand, opt => opt.Ignore()));
-
+        var config = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<PushLawnmowerModel, PushLawnmower>()
+                .ForMember(l => l.Brand, t => t.Ignore())
+                .ForMember(l => l.Orders, t => t.Ignore());
+            cfg.CreateMap<RideOnLawnmowerModel, RideOnLawnmower>()
+                .ForMember(l => l.Brand, t => t.Ignore())
+                .ForMember(l => l.Orders, t => t.Ignore());
+            cfg.CreateMap<LawnmowerModel, Lawnmower>();
+            cfg.CreateMap<ILawnmowerModel, Lawnmower>()
+                .Include<PushLawnmowerModel, PushLawnmower>()
+                .Include<RideOnLawnmowerModel, RideOnLawnmower>();
+        });
         IMapper mapper = new Mapper(config);
 
         var data = UnitOfWork.LawnmowerRepository.Get(model.Id);

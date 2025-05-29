@@ -4,10 +4,10 @@ namespace BusinessLayer;
 
 public interface ILawnmowerService
 {
-    int Add(LawnmowerModel model);
+    int Add(ILawnmowerModel model);
     Task Delete(int id);
     LawnmowerModel Get(int id);
     IList<LawnmowerModel> List(int brandId);
-    int Update(LawnmowerModel model);
+    int Update(ILawnmowerModel model);
     IList<BrandModel> Brands();
 }
