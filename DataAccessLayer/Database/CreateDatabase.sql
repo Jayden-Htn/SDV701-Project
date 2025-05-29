@@ -31,7 +31,7 @@ CREATE TABLE Lawnmower (
   QuantityInStock int NOT NULL, 
   Photo           image NULL, 
   FuelDetails     varchar(100) NOT NULL, 
-  LastUpdated     date NOT NULL, 
+  LastUpdated     datetime NOT NULL, 
   Type			  varchar(50) NOT NULL,
   TopSpeed        int NULL, 
   Weight          int NULL, 
