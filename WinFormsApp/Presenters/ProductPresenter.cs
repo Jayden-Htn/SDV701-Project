@@ -43,17 +43,17 @@ public class ProductPresenter
         View.Model = model;
     }
 
-    private async void OnSave(object sender, ILawnmowerModel model)
+    private void OnSave(object sender, ILawnmowerModel model)
     {
         if (model.Id == 0)
         {
             // Create
-            await _lawnmowerClient.AddAsync(model); 
+            _lawnmowerClient.AddAsync(model); 
         }
         else
         {
             // Update
-            await _lawnmowerClient.UpdateAsync(model);
+             _lawnmowerClient.UpdateAsync(model);
         }
         View.Close();
     }

@@ -12,4 +12,5 @@ public interface IProductView
     public event EventHandler LoadRequested;
 
     void Close();
+    DialogResult ShowDialog();
 }

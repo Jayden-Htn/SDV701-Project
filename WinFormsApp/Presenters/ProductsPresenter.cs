@@ -13,7 +13,7 @@ namespace WinFormsApp.Presenters
         readonly IOrderClient _orderClient;
         readonly IServiceProvider _services;
 
-        private int _currentBrandFilterId = 0;
+        int _currentBrandFilterId = 0;
         IList<BrandModel> _brands;
 
         public ProductsPresenter(IProductsView view, ILawnmowerClient lawnmowerClient, IOrderClient orderClient, IServiceProvider services)
@@ -66,7 +66,7 @@ namespace WinFormsApp.Presenters
         private async void OnEdit(object sender, ILawnmowerModel model)
         {
             var presenter = _services.GetRequiredService<ProductPresenter>();
-            var form = (ProductForm)presenter.View;
+            var form = presenter.View;
 
             var lawnmower = await _lawnmowerClient.GetAsync(model.Id, model.Type);
             var data = new ProductDataModel();

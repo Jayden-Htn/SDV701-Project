@@ -308,6 +308,7 @@
             Controls.Add(CloseButton);
             Controls.Add(label2);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "ProductForm";
             Text = "ProductForm";
             ((System.ComponentModel.ISupportInitialize)StockNumeric).EndInit();
