@@ -27,7 +27,6 @@ namespace WinFormsApp.Views
             {
                 _model = value;
                 SetData(value);
-                
             }
             get { return _model; }
         }
@@ -40,7 +39,7 @@ namespace WinFormsApp.Views
             NameInput.Text = product.Name;
             DescriptionInput.Text = product.Description;
             PriceNumeric.Value = product.Price;
-            StockNumeric.Value = product.QuantityInStock;            
+            StockNumeric.Value = product.QuantityInStock;
             FuelDetailsInput.Text = product.FuelDetails;
 
             // Date
@@ -83,7 +82,8 @@ namespace WinFormsApp.Views
             }
 
             // Photo
-            if (product.Photo != null) {
+            if (product.Photo != null)
+            {
                 byte[] bytes = Convert.FromBase64String(product.Photo);
                 using (var ms = new MemoryStream(bytes))
                 {
@@ -122,7 +122,7 @@ namespace WinFormsApp.Views
                 prod.Weight = (int)TypeSpecificNumeric.Value;
                 product = prod;
 
-            } 
+            }
             else if (TypeInput.Text == "RideOn")
             {
                 var prod = new RideOnLawnmowerModel();
@@ -139,7 +139,7 @@ namespace WinFormsApp.Views
             product.Name = NameInput.Text;
             product.Description = DescriptionInput.Text;
             product.BrandId = (int)BrandCombo.SelectedValue;
-            product.Brand= (BrandModel)BrandCombo.SelectedItem;
+            product.Brand = (BrandModel)BrandCombo.SelectedItem;
             product.Price = Convert.ToDecimal(PriceNumeric.Value);
             product.QuantityInStock = (int)StockNumeric.Value;
             product.Photo = null;
@@ -163,6 +163,23 @@ namespace WinFormsApp.Views
         private void OnMainFormLoad(object sender, EventArgs e)
         {
             LoadRequested?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void DeleteImageButton_Click(object sender, EventArgs e)
+        {
+            ImageBox.Image = null;
+        }
+
+        private void AddImageButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files (*.jpg;*.jpeg;*.png;*.gif)|*.jpg;*.jpeg;*.png;*.gif";
+
+            if (ofd.ShowDialog() != DialogResult.OK)
+                return;
+
+            var file = new FileInfo(ofd.FileName);
+            ImageBox.Image = Image.FromFile(ofd.FileName);
         }
     }
 }

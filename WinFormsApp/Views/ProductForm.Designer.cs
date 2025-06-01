@@ -52,6 +52,7 @@
             PriceNumeric = new NumericUpDown();
             TypeInput = new TextBox();
             TypeSpecificNumeric = new NumericUpDown();
+            OpenFileDialog = new OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)StockNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ImageBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PriceNumeric).BeginInit();
@@ -243,6 +244,7 @@
             AddImageButton.TabIndex = 28;
             AddImageButton.Text = "Add";
             AddImageButton.UseVisualStyleBackColor = true;
+            AddImageButton.Click += AddImageButton_Click;
             // 
             // DeleteImageButton
             // 
@@ -252,6 +254,7 @@
             DeleteImageButton.TabIndex = 27;
             DeleteImageButton.Text = "Remove";
             DeleteImageButton.UseVisualStyleBackColor = true;
+            DeleteImageButton.Click += DeleteImageButton_Click;
             // 
             // PriceNumeric
             // 
@@ -277,6 +280,10 @@
             TypeSpecificNumeric.Name = "TypeSpecificNumeric";
             TypeSpecificNumeric.Size = new Size(133, 29);
             TypeSpecificNumeric.TabIndex = 31;
+            // 
+            // OpenFileDialog
+            // 
+            OpenFileDialog.FileName = "openFileDialog1";
             // 
             // ProductForm
             // 
@@ -343,5 +350,6 @@
         private NumericUpDown PriceNumeric;
         private TextBox TypeInput;
         private NumericUpDown TypeSpecificNumeric;
+        private OpenFileDialog OpenFileDialog;
     }
 }
