@@ -29,31 +29,38 @@ public class ProductPresenter
     private async Task LoadLawnmowerAsync()
     {
         var oldModel = _view.Model.Lawnmower;
-        var lawnmower = await _lawnmowerClient.GetAsync(oldModel.Id, oldModel.Type);
+
+        ProductDataModel model = new();
+        if (oldModel.Id != 0)
+        {
+            model.Lawnmower = await _lawnmowerClient.GetAsync(oldModel.Id, oldModel.Type);
+        }
+        else
+        {
+            model.Lawnmower = oldModel;
+        }
 
         if (_brands == null)
         {
             _brands = await _lawnmowerClient.ListBrandsAsync();
         }
 
-        var model = new ProductDataModel();
-        model.Lawnmower = lawnmower;
         model.Brands = _brands.ToList();
 
         View.Model = model;
     }
 
-    private void OnSave(object sender, ILawnmowerModel model)
+    private async void OnSave(object sender, ILawnmowerModel model)
     {
         if (model.Id == 0)
         {
             // Create
-            _lawnmowerClient.AddAsync(model); 
+            await _lawnmowerClient.AddAsync(model); 
         }
         else
         {
             // Update
-             _lawnmowerClient.UpdateAsync(model);
+             await _lawnmowerClient.UpdateAsync(model);
         }
         View.Close();
     }

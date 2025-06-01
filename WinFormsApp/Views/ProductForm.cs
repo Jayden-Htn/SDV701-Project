@@ -17,8 +17,6 @@ namespace WinFormsApp.Views
         {
             InitializeComponent();
 
-            SaveButton.Click += OnSaveButtonClick;
-            CloseButton.Click += OnCloseButtonClick;
             Load += OnMainFormLoad;
         }
 
@@ -41,9 +39,15 @@ namespace WinFormsApp.Views
             PriceNumeric.Value = product.Price;
             StockNumeric.Value = product.QuantityInStock;            
             FuelDetailsInput.Text = product.FuelDetails;
-            LastUpdatedLabel.Text = $"Last updated: {product.LastUpdated.ToString()}";
 
-            TypeInput.Text = product.Type;
+            if (value.Lawnmower.Id == 0)
+            {
+                LastUpdatedLabel.Text = "Creating product";
+            }
+            else
+            {
+                LastUpdatedLabel.Text = $"Last updated: {product.LastUpdated.ToString()}";
+            }
 
             BrandCombo.DataSource = null;
             BrandCombo.DataSource = value.Brands;
@@ -54,15 +58,17 @@ namespace WinFormsApp.Views
                 BrandCombo.SelectedValue = product.BrandId;
             }
 
-            if (product.Type == "RideOn")
+            if (product is RideOnLawnmowerModel rideOn)
             {
                 TypeSpecificLabel.Text = "Max Speed (km/h)";
-                TypeSpecificNumeric.Value = (product as RideOnLawnmowerModel).TopSpeed;
+                TypeSpecificNumeric.Value = rideOn.TopSpeed;
+                TypeInput.Text = "RideOn";
             }
-            else if (product.Type == "Push")
+            else if (product is PushLawnmowerModel push)
             {
                 TypeSpecificLabel.Text = "Weight (kg)";
-                TypeSpecificNumeric.Value = (product as PushLawnmowerModel).Weight; ;
+                TypeSpecificNumeric.Value = push.Weight; ;
+                TypeInput.Text = "Push";
             }
             else
             {
@@ -73,7 +79,16 @@ namespace WinFormsApp.Views
 
         private void OnSaveButtonClick(object sender, EventArgs e)
         {
-            SaveRequested?.Invoke(this, GetData());
+            ILawnmowerModel model = GetData();
+
+            if (model.Name.Length == 0 || model.FuelDetails.Length == 0 || model.FuelDetails.Length == 0)
+            {
+                MessageBox.Show("Missing form data", "Error");
+            }
+            else
+            {
+                SaveRequested?.Invoke(this, model);
+            }
         }
 
         private void OnCloseButtonClick(object sender, EventArgs e)

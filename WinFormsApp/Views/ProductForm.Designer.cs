@@ -91,7 +91,6 @@
             // 
             // CloseButton
             // 
-            CloseButton.DialogResult = DialogResult.Cancel;
             CloseButton.Location = new Point(803, 25);
             CloseButton.Name = "CloseButton";
             CloseButton.Size = new Size(102, 31);
@@ -308,7 +307,6 @@
             Controls.Add(CloseButton);
             Controls.Add(label2);
             Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "ProductForm";
             Text = "ProductForm";
             ((System.ComponentModel.ISupportInitialize)StockNumeric).EndInit();

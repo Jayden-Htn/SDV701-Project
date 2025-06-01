@@ -5,7 +5,7 @@ namespace WinFormsApp.Views;
 
 public partial class ProductsForm : Form, IProductsView
 {
-    public event EventHandler AddRequested;
+    public event EventHandler<ILawnmowerModel> AddRequested;
     public event EventHandler QuitRequested;
     public event EventHandler LoadRequested;
     public event EventHandler<int> FilterRequested;
@@ -54,6 +54,11 @@ public partial class ProductsForm : Form, IProductsView
             FilterCombo.SelectedIndex = value.CurrentBrandId; // Should fix id/index being used interchangeably
         }
 
+        // Set create type options
+        CreateTypeCombo.Items.Clear();
+        CreateTypeCombo.Items.AddRange([ Name = "Push", Name = "RideOn" ]);
+        CreateTypeCombo.SelectedIndex = 0;
+
         // Set products
         ProductsPanel.Controls.Clear();
 
@@ -77,7 +82,8 @@ public partial class ProductsForm : Form, IProductsView
 
     private void OnAddButtonClick(object sender, EventArgs e)
     {
-        AddRequested?.Invoke(this, EventArgs.Empty);
+        ILawnmowerModel model = (string)CreateTypeCombo.SelectedItem == "Push" ? new PushLawnmowerModel() : new RideOnLawnmowerModel();
+        AddRequested?.Invoke(this, model);
     }
 
     private void OnQuitButtonClick(object sender, EventArgs e)

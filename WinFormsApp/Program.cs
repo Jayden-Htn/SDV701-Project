@@ -27,8 +27,8 @@ static class Program
         services.AddSingleton<IApiConfiguration>(apiConfiguration);
         services.RegisterClients();
         services.AddSingleton<ProductsForm>();
-        services.AddTransient<ProductForm>();
-        services.AddTransient<OrdersForm>();
+        services.AddSingleton<ProductForm>();
+        services.AddSingleton<OrdersForm>();
         services.AddSingleton<IProductsView>(sp => sp.GetRequiredService<ProductsForm>());
         services.AddSingleton<IProductView>(sp => sp.GetRequiredService<ProductForm>());
         services.AddSingleton<IOrdersView>(sp => sp.GetRequiredService<OrdersForm>());

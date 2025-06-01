@@ -7,7 +7,7 @@ public interface IProductsView
 {
     ProductsDataModel Model { set; }
 
-    event EventHandler AddRequested;
+    event EventHandler<ILawnmowerModel> AddRequested;
     event EventHandler<ILawnmowerModel> EditRequested;
     event EventHandler<int> DeleteRequested;
     event EventHandler QuitRequested;

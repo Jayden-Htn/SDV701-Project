@@ -49,24 +49,25 @@ namespace WinFormsApp.Presenters
             _view.Model = model;
         }
 
-        private async void OnAdd(object sender, EventArgs e)
+        private async void OnAdd(object sender, ILawnmowerModel model)
         {
-            //var form = (ProductForm)_services.GetService(typeof(ProductForm));
-            //var data = new ProductDataModel();
-            //data.Lawnmower = new LawnmowerModel();
-            //form.Model = data;
+            var form = (_services.GetRequiredService<ProductPresenter>()).View;
 
-            //if (form.ShowDialog() == DialogResult.OK)
-            //{
-            //    await _lawnmowerClient.AddAsync(form.GetData());
-            //    await LoadDataAsync();
-            //}
+            var data = new ProductDataModel();
+            data.Lawnmower = model;
+            data.Brands = _brands;
+            form.Model = data;
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                Thread.Sleep(250); // Otherwise save hasn't finished and gets old data
+                await LoadDataAsync();
+            }
         }
 
         private async void OnEdit(object sender, ILawnmowerModel model)
         {
-            var presenter = _services.GetRequiredService<ProductPresenter>();
-            var form = presenter.View;
+            var form = (_services.GetRequiredService<ProductPresenter>()).View;
 
             var lawnmower = await _lawnmowerClient.GetAsync(model.Id, model.Type);
             var data = new ProductDataModel();
@@ -83,8 +84,12 @@ namespace WinFormsApp.Presenters
 
         private async void OnDelete(object sender, int id)
         {
-            await _lawnmowerClient.DeleteAsync(id);
-            await LoadDataAsync();
+            string msg = "Are you sure you want to delete this product?";
+            if (MessageBox.Show(msg, "Confirmation", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                await _lawnmowerClient.DeleteAsync(id);
+                await LoadDataAsync();
+            }
         }
 
         private void OnQuitRequested(object? sender, EventArgs e)
