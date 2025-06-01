@@ -37,10 +37,14 @@ public partial class ProductItemControl : UserControl, IProductItemView
         BrandLabel.Text = product.Brand.Name;
         TypeLabel.Text = product.Type;
 
-        //if (product.Photo != null)
-        //{
-        //    ImageBox.Image = product.Photo;
-        //}
+        if (product.Photo != null)
+        {
+            byte[] bytes = Convert.FromBase64String(product.Photo);
+            using (var ms = new MemoryStream(bytes))
+            {
+                ImageBox.Image = Image.FromStream(ms);
+            }
+        }
     }
 
     public void OnEditButtonClick(object sender, EventArgs e)

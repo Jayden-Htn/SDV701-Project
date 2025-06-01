@@ -1,4 +1,5 @@
 ﻿using Models;
+using System.Drawing.Imaging;
 using WinFormsApp.Models;
 
 namespace WinFormsApp.Views
@@ -34,12 +35,15 @@ namespace WinFormsApp.Views
         private void SetData(ProductDataModel value)
         {
             var product = value.Lawnmower;
+
+            // Base details
             NameInput.Text = product.Name;
             DescriptionInput.Text = product.Description;
             PriceNumeric.Value = product.Price;
             StockNumeric.Value = product.QuantityInStock;            
             FuelDetailsInput.Text = product.FuelDetails;
 
+            // Date
             if (value.Lawnmower.Id == 0)
             {
                 LastUpdatedLabel.Text = "Creating product";
@@ -49,6 +53,7 @@ namespace WinFormsApp.Views
                 LastUpdatedLabel.Text = $"Last updated: {product.LastUpdated.ToString()}";
             }
 
+            // Brand
             BrandCombo.DataSource = null;
             BrandCombo.DataSource = value.Brands;
             BrandCombo.DisplayMember = "Name";
@@ -58,6 +63,7 @@ namespace WinFormsApp.Views
                 BrandCombo.SelectedValue = product.BrandId;
             }
 
+            // Type specific
             if (product is RideOnLawnmowerModel rideOn)
             {
                 TypeSpecificLabel.Text = "Max Speed (km/h)";
@@ -74,6 +80,15 @@ namespace WinFormsApp.Views
             {
                 TypeSpecificLabel.Text = "";
                 TypeSpecificNumeric.Value = 0;
+            }
+
+            // Photo
+            if (product.Photo != null) {
+                byte[] bytes = Convert.FromBase64String(product.Photo);
+                using (var ms = new MemoryStream(bytes))
+                {
+                    ImageBox.Image = Image.FromStream(ms);
+                }
             }
         }
 
@@ -99,6 +114,8 @@ namespace WinFormsApp.Views
         public ILawnmowerModel GetData()
         {
             ILawnmowerModel product;
+
+            // Type specific
             if (TypeInput.Text == "Push")
             {
                 var prod = new PushLawnmowerModel();
@@ -117,6 +134,7 @@ namespace WinFormsApp.Views
                 product = new LawnmowerModel();
             }
 
+            // Base
             product.Id = _model.Lawnmower.Id;
             product.Name = NameInput.Text;
             product.Description = DescriptionInput.Text;
@@ -128,6 +146,16 @@ namespace WinFormsApp.Views
             product.FuelDetails = FuelDetailsInput.Text;
             product.Type = TypeInput.Text;
             product.LastUpdated = DateTime.Now;
+
+            // Image
+            if (ImageBox.Image != null)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    ImageBox.Image.Save(ms, ImageFormat.Png);
+                    product.Photo = Convert.ToBase64String(ms.ToArray());
+                }
+            }
 
             return product;
         }
