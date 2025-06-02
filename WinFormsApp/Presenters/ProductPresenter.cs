@@ -62,12 +62,12 @@ public class ProductPresenter
             // Update
              await _lawnmowerClient.UpdateAsync(model);
         }
-        View.Close();
+        View.Hide();
     }
 
     private void OnCloseRequested(object? sender, EventArgs e)
     {
-        View.Close();
+        View.Hide();
     }
 
     private async void OnLoadRequested(object? sender, EventArgs e)

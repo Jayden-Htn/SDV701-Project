@@ -11,6 +11,6 @@ public interface IProductView
     public event EventHandler CloseRequested;
     public event EventHandler LoadRequested;
 
-    void Close();
+    void Hide();
     DialogResult ShowDialog();
 }
