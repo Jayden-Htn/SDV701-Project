@@ -11,7 +11,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<Products />} />
-        <Route path="/product/id" element={<Product/>} />
+        <Route path="/product/:id" element={<Product/>} />
       </Routes>  
     </>
   )
