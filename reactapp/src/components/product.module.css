@@ -31,8 +31,8 @@ button {
   border: solid 2px darkgrey;
   padding: 4px 10px;
 }
-.button:disabled {
-  background-color: darkgrey;
+button:disabled {
+  color: darkgray;
 }
 
 .photo {

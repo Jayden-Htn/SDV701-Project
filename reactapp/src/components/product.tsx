@@ -50,7 +50,12 @@ const Product = () => {
           <div className={styles.textRow}>
             <p><b>${product?.price}</b></p>
             <p>{product?.quantityAvailable} in stock</p>
-            <button onChange={() => navigate(`/order/${product?.id}`)}>Purchase</button>
+            <button 
+              disabled={product?.quantityAvailable == 0}
+              onChange={() => navigate(`/order/${product?.id}`)}
+            >
+              Purchase
+            </button>
           </div>
           <p>{product?.description}</p>
           <p><b>Brand:</b> {product?.brand}</p>
