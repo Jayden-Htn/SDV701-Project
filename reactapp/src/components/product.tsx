@@ -46,13 +46,13 @@ const Product = () => {
     <div className={styles.container}>
       <div className={styles.bodyBlock}>
         <div className={styles.article}>
-          <h3>{product?.brand} {product?.name}</h3>
+          <h2>{product?.brand} {product?.name}</h2>
           <div className={styles.textRow}>
             <p><b>${product?.price}</b></p>
             <p>{product?.quantityAvailable} in stock</p>
             <button 
               disabled={product?.quantityAvailable == 0}
-              onChange={() => navigate(`/order/${product?.id}`)}
+              onClick={() => navigate(`/order/${product?.id}`)}
             >
               Purchase
             </button>

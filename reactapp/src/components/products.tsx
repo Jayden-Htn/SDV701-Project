@@ -81,7 +81,7 @@ const Products = () => {
               <div key={i} className={styles.itemCard}>
                 <img src={product.photo} className={styles.photo}></img>
                 <div className={styles.cardText}>
-                  <Link to={`/Product/${product?.id}`}>
+                  <Link to={`/product/${product?.id}`}>
                     <h3 className={styles.textItem}>{product.brand} {product.name}</h3>
                   </Link>
                   <div className={styles.textRow}>
