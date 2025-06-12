@@ -15,6 +15,7 @@ public class OrderModel
     public DateTime TimeCreated { get; set; }
 
     [JsonPropertyName("itemPrice")]
+    [DataType(DataType.Currency)]
     public decimal ItemPrice { get; set; }
 
     [Required]
@@ -24,10 +25,14 @@ public class OrderModel
 
     [StringLength(50)]
     [JsonPropertyName("customerEmail")]
+    [DataType(DataType.EmailAddress)]
+    [EmailAddress]
     public string CustomerEmail { get; set; }
 
     [StringLength(20)]
     [JsonPropertyName("customerPhone")]
+    [DataType(DataType.PhoneNumber)]
+    [Phone]
     public string CustomerPhone { get; set; }
 
     [JsonPropertyName("productId")]

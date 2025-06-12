@@ -23,6 +23,7 @@ public class LawnmowerModel : ILawnmowerModel
 
     [Required]
     [JsonPropertyName("price")]
+    [DataType(DataType.Currency)]
     public decimal Price { get; set; }
 
     [Required]
