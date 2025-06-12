@@ -11,7 +11,7 @@ const Order = () => {
   const navigate = useNavigate();
   const { type, id } = useParams()
   const [product, setProduct] = useState<Product>()
-  const [quantity, setQuantity] = useState<number>(1)
+  const [quantity, setQuantity] = useState<number | undefined>(1)
   const [customerName, setCustomerName] = useState<string>("")
   const [customerEmail, setCustomerEmail] = useState<string>("")
   const [customerPhone, setCustomerPhone] = useState<string>("")
@@ -51,6 +51,22 @@ const Order = () => {
     }
   }
 
+  const setPurchaseQuantity = (quantityStr: string) => {
+    if (quantityStr == "" || quantityStr == "-") {
+      setQuantity(undefined)
+      return;
+    }
+    const quantity = Number(quantityStr);
+
+    if (quantity > product?.quantityInStock!) {
+      setQuantity(product?.quantityInStock ?? 0)
+    } else if (quantity < 0) {
+      setQuantity(0)
+    } else {
+      setQuantity(quantity)
+    }
+  }
+
 
   return (
     <div className={styles.container}>
@@ -62,7 +78,9 @@ const Order = () => {
             <p><b>Price per item:</b> ${product?.price} in stock</p>
             <div className={styles.textRow}>
               <label htmlFor="quantity"><b>Quantity:</b></label>
-              <input type="number" id="quantity" name="quantity" value={quantity} onChange={(e) => setQuantity(Number(e.target.value))}></input>
+              <input type="number" id="quantity" name="quantity" value={quantity} 
+                onChange={(e) => setPurchaseQuantity(e.target.value)}>
+              </input>
             </div>
             <p><b>Order total:</b> ${quantity && product?.price ? (product!.price * quantity!).toFixed(2) : ""}</p>
           </div>

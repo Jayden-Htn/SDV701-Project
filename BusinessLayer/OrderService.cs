@@ -57,6 +57,10 @@ public class OrderService : ServiceBase, IOrderService
         {
             throw new Exception("Product doesn't exist");
         }
+        if (orderedProduct.QuantityInStock < data.Quantity)
+        {
+            throw new Exception("Not enough stock available");
+        }
         orderedProduct.QuantityInStock -= data.Quantity;
         UnitOfWork.LawnmowerRepository.Update(orderedProduct);
 
