@@ -36,6 +36,7 @@
             FilterCombo = new ComboBox();
             AddButton = new Button();
             CreateTypeCombo = new ComboBox();
+            BrandDescLabel = new Label();
             SuspendLayout();
             // 
             // label1
@@ -109,16 +110,26 @@
             // CreateTypeCombo
             // 
             CreateTypeCombo.FormattingEnabled = true;
-            CreateTypeCombo.Location = new Point(571, 87);
+            CreateTypeCombo.Location = new Point(619, 87);
             CreateTypeCombo.Name = "CreateTypeCombo";
-            CreateTypeCombo.Size = new Size(164, 29);
+            CreateTypeCombo.Size = new Size(116, 29);
             CreateTypeCombo.TabIndex = 13;
+            // 
+            // BrandDescLabel
+            // 
+            BrandDescLabel.AutoSize = true;
+            BrandDescLabel.Location = new Point(318, 91);
+            BrandDescLabel.Name = "BrandDescLabel";
+            BrandDescLabel.Size = new Size(89, 21);
+            BrandDescLabel.TabIndex = 14;
+            BrandDescLabel.Text = "Description";
             // 
             // ProductsForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(873, 593);
+            Controls.Add(BrandDescLabel);
             Controls.Add(CreateTypeCombo);
             Controls.Add(AddButton);
             Controls.Add(FilterCombo);
@@ -143,5 +154,6 @@
         private ComboBox FilterCombo;
         private Button AddButton;
         private ComboBox CreateTypeCombo;
+        private Label BrandDescLabel;
     }
 }

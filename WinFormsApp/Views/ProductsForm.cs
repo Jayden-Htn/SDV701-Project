@@ -41,7 +41,7 @@ public partial class ProductsForm : Form, IProductsView
             {
                 Id = 0,
                 Name = "All",
-                Description = "View every lawnmower we have in stock."
+                Description = "Every lawnmower in stock."
             };
 
             BrandModel[] brands = new[] { newBrand }
@@ -52,6 +52,8 @@ public partial class ProductsForm : Form, IProductsView
             FilterCombo.DisplayMember = "Name";
             FilterCombo.ValueMember = "Id";
             FilterCombo.SelectedIndex = value.CurrentBrandId; // Should fix id/index being used interchangeably
+
+            BrandDescLabel.Text = brands.FirstOrDefault(b => b.Id == value.CurrentBrandId)?.Description;
         }
 
         // Set create type options
