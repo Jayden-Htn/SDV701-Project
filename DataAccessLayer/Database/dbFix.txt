@@ -1,0 +1,4 @@
+If database becomes locked:
+- <in admin CMD> sqllocaldb stop "MSSQLLocalDB"
+- Delete db log file
+- <in admin CMD> sqllocaldb start "MSSQLLocalDB"
