@@ -64,7 +64,7 @@
             QuitButton.Location = new Point(741, 12);
             QuitButton.Name = "QuitButton";
             QuitButton.Size = new Size(102, 31);
-            QuitButton.TabIndex = 2;
+            QuitButton.TabIndex = 5;
             QuitButton.Text = "Quit";
             QuitButton.UseVisualStyleBackColor = true;
             // 
@@ -84,7 +84,7 @@
             OrdersButton.Location = new Point(741, 49);
             OrdersButton.Name = "OrdersButton";
             OrdersButton.Size = new Size(102, 31);
-            OrdersButton.TabIndex = 10;
+            OrdersButton.TabIndex = 4;
             OrdersButton.Text = "Orders";
             OrdersButton.UseVisualStyleBackColor = true;
             OrdersButton.Click += OrdersButton_Click;
@@ -96,14 +96,14 @@
             FilterCombo.Location = new Point(149, 87);
             FilterCombo.Name = "FilterCombo";
             FilterCombo.Size = new Size(164, 29);
-            FilterCombo.TabIndex = 11;
+            FilterCombo.TabIndex = 1;
             // 
             // AddButton
             // 
             AddButton.Location = new Point(741, 85);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(102, 31);
-            AddButton.TabIndex = 12;
+            AddButton.TabIndex = 3;
             AddButton.Text = "Add";
             AddButton.UseVisualStyleBackColor = true;
             // 
@@ -113,7 +113,7 @@
             CreateTypeCombo.Location = new Point(619, 87);
             CreateTypeCombo.Name = "CreateTypeCombo";
             CreateTypeCombo.Size = new Size(116, 29);
-            CreateTypeCombo.TabIndex = 13;
+            CreateTypeCombo.TabIndex = 2;
             // 
             // BrandDescLabel
             // 
