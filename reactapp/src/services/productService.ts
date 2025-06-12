@@ -6,7 +6,6 @@ const API_URL = "http://localhost:5243/api/lawnmower/";
 // Get item
 const getAsync = async (id: number, type: string) => {
   const res = await axios.get(API_URL+id);
-  console.log(res)
   const lawnmower: Lawnmower = res.data;
   return lawnmower;
 };

@@ -37,5 +37,5 @@ public class OrderModel
     public bool Completed { get; set; }
 
     [JsonPropertyName("product")]
-    public LawnmowerModel Product { get; set; }
+    public LawnmowerModel? Product { get; set; }
 }

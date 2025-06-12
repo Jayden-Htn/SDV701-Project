@@ -13,7 +13,6 @@ const Product = () => {
     const getProduct = async () => {
       try {
         const res: Lawnmower = await productService.getAsync(Number(id), type!);
-        console.log(res)
         setProduct(res);
       } catch (err) {
         console.error(err);

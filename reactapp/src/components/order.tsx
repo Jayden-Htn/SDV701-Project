@@ -2,8 +2,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styles from "./order.module.css";
 import React, { useEffect, useState } from "react";
 import Product from "../models/Lawnmower";
+import OrderModel from "../models/Order";
 import Lawnmower from '../models/Lawnmower';
 import productService from '../services/productService';
+import orderService from '../services/orderService';
 
 const Order = () => {
   const navigate = useNavigate();
@@ -27,11 +29,26 @@ const Order = () => {
     getProduct();
   }, []);
 
-  console.log(product)
-
-  const handlePurchase =() => {
-    window.alert("Purchase successful");
-    navigate(`/product/${product?.type}/${product?.id}`);
+  const handlePurchase = async () => {
+    try {
+      const orderObj = {
+        id: 0,
+        quantity: quantity,
+        timeCreated: new Date(),
+        itemPrice: product!.price,
+        customerName: customerName,
+        customerEmail: customerEmail,
+        customerPhone: customerPhone,
+        productId: product!.id,
+        completed: false
+      } as OrderModel;
+      await orderService.addAsync(orderObj);
+      window.alert("Purchase successful");
+      navigate(`/product/${product?.type}/${product?.id}`);
+    } catch (err) {
+      console.error(err);
+      window.alert("Error making purchase");
+    }
   }
 
 

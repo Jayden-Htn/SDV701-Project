@@ -46,14 +46,21 @@ public class OrderService : ServiceBase, IOrderService
         });
 
         IMapper mapper = new Mapper(config);
-
         var data = new Order();
-
         mapper.Map(model, data);
 
         UnitOfWork.OrderRepository.Add(data);
-        UnitOfWork.Save();
 
+        // Remove items from stock
+        var orderedProduct = UnitOfWork.LawnmowerRepository.Get(data.ProductId);
+        if (orderedProduct == null)
+        {
+            throw new Exception("Product doesn't exist");
+        }
+        orderedProduct.QuantityInStock -= data.Quantity;
+        UnitOfWork.LawnmowerRepository.Update(orderedProduct);
+
+        UnitOfWork.Save();
         return data.Id;
     }
 
