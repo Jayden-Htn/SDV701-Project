@@ -1,51 +1,37 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from "./order.module.css";
 import React, { useEffect, useState } from "react";
-
-interface product {
-  id: number,
-  name: string,
-  description: string,
-  price: number,
-  quantityAvailable: number,
-  brand: string,
-  brandId: number,
-  type: string,
-  photo: string | undefined,
-  fuelDetails: string,
-  weight: number,
-  topSpeed: number
-}
+import Product from "../models/Lawnmower";
+import Lawnmower from '../models/Lawnmower';
+import productService from '../services/productService';
 
 const Order = () => {
   const navigate = useNavigate();
-  const id = useParams()
-
-  var content = 
-      {
-        id: 1,
-        name: "Name",
-        description: "Description description description description description description description description description description",
-        price: 13.55,
-        quantityAvailable: 5,
-        brand: "Tooler",
-        brandId: 1,
-        type: "RideOn",
-        photo: undefined,
-        fuelDetails: "5 litre tank, petrol",
-        weight: 25,
-        topSpeed: 15
-      }
-
-  const [product, setProduct] = useState<product>(content)
+  const { type, id } = useParams()
+  const [product, setProduct] = useState<Product>()
   const [quantity, setQuantity] = useState<number>(1)
   const [customerName, setCustomerName] = useState<string>("")
   const [customerEmail, setCustomerEmail] = useState<string>("")
   const [customerPhone, setCustomerPhone] = useState<string>("")
 
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res: Lawnmower = await productService.getAsync(Number(id), type!);
+        setProduct(res);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getProduct();
+  }, []);
+
+  console.log(product)
+
   const handlePurchase =() => {
     window.alert("Purchase successful");
-    navigate(`/product/${product?.id}`);
+    navigate(`/product/${product?.type}/${product?.id}`);
   }
 
 
@@ -55,14 +41,13 @@ const Order = () => {
         <h2>Create Order</h2>
         <div className={styles.bodyBlock}>
           <div>
-            <p><b>Item:</b> {product?.brand} {product?.name}</p>
+            <p><b>Item:</b> {product?.brand?.name} {product?.name}</p>
             <p><b>Price per item:</b> ${product?.price} in stock</p>
             <div className={styles.textRow}>
               <label htmlFor="quantity"><b>Quantity:</b></label>
               <input type="number" id="quantity" name="quantity" value={quantity} onChange={(e) => setQuantity(Number(e.target.value))}></input>
             </div>
-            <p><b>Order total:</b> ${quantity ? (product!.price * quantity!).toFixed(2) : ""}</p>
-            
+            <p><b>Order total:</b> ${quantity && product?.price ? (product!.price * quantity!).toFixed(2) : ""}</p>
           </div>
           <div className={styles.aside}>
             <div className={styles.asideColumn}>

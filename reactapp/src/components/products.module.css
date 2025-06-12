@@ -16,26 +16,30 @@
   background-color: #edecec;
   border-radius: 15px;
   flex-direction: column;
-  flex: 0 0 250px;
+  flex: 0 0 100px;
   gap: 0;
   margin: 0;
 }
 
 .photo {
   width: 270px;
-  height: 180px;
+  height: 270px;
   border: 2px solid black;
   border-radius: 8px;
   box-sizing: border-box;
+}
+
+h3 {
+  text-decoration: underline;
 }
 
 .cardText {
   padding: 0 10px 10px 10px;
   display: flex;
   flex-direction: column;
-  flex: 1 0 auto;
+  flex: 0 0 auto;
   width: 250px;
-  gap: 6px;
+  gap: 0;
   margin: 0;
 }
 
@@ -44,7 +48,9 @@
   flex-direction: row;
   justify-content: start;
   gap: 20px;
-  align-items: center
+  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 select {
@@ -53,4 +59,9 @@ select {
   font-size: 14px;
   margin-left: 10px;
   width: 80px;
+}
+
+.description {
+  display: flex;
+  flex: 1 0 100px;
 }

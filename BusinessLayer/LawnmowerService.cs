@@ -16,6 +16,8 @@ public class LawnmowerService : ServiceBase, ILawnmowerService
 
         var config = new MapperConfiguration(cfg =>
         {
+            cfg.CreateMap<Brand, BrandModel>()
+                .ForMember(dest => dest.Lawnmowers, opt => opt.Ignore());
             cfg.CreateMap<Order, OrderModel>();
             cfg.CreateMap<Lawnmower, LawnmowerModel>();
             cfg.CreateMap<PushLawnmower, PushLawnmowerModel>();
@@ -35,7 +37,6 @@ public class LawnmowerService : ServiceBase, ILawnmowerService
         {
             return mapper.Map(lawnmower, new LawnmowerModel());
         }
-
     }
 
     public int Add(ILawnmowerModel model)

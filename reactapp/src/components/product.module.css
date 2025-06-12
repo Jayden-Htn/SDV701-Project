@@ -30,13 +30,14 @@ button {
   border-radius: 8px;
   border: solid 2px darkgrey;
   padding: 4px 10px;
+  margin: -10px 0 0 0;
 }
 button:disabled {
   color: darkgray;
 }
 
 .photo {
-  width: auto;
+  width: 24vw;
   height: auto;
   min-height: 164px;
   min-width: 164px;

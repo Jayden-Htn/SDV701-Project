@@ -2,50 +2,25 @@ import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import styles from "./products.module.css";
 import React from "react";
-
-interface product {
-  id: number,
-  name: string,
-  description: string,
-  price: number,
-  quantityAvailable: number,
-  brand: string,
-  brandId: number,
-  type: string,
-  photo: string | undefined
-}
+import Lawnmower from "../models/Lawnmower";
+import productService from "../services/productService"
 
 const Products = () => {
-  const [content, setContent] = useState<product[]>();
+  const [content, setContent] = useState<Lawnmower[]>();
   const [filter, setFilter] = useState<number>(0);
-  const [filteredContent, setFilteredContent] = useState<product[]>();
+  const [filteredContent, setFilteredContent] = useState<Lawnmower[]>();
 
   useEffect(() => {
-    var content = [
-      {
-        id: 1,
-        name: "Name",
-        description: "Description description description description description description description description description description",
-        price: 13.55,
-        quantityAvailable: 5,
-        brand: "Tooler",
-        brandId: 1,
-        type: "RideOn",
-        photo: undefined
-      },
-      {
-        id: 2,
-        name: "Name2",
-        description: "Description description description description description description description description description description",
-        price: 11.55,
-        quantityAvailable: 10,
-        brand: "MowGo",
-        brandId: 2,
-        type: "RideOn",
-        photo: undefined
+    const getProducts = async () => {
+      try {
+        const res: Lawnmower[] = await productService.listAsync();
+        setContent(res);
+      } catch (err) {
+        console.error(err);
       }
-    ]
-    setContent([...content, ...content, ...content, ...content]);
+    };
+
+    getProducts();
   }, []);
 
   useEffect(() => {
@@ -79,19 +54,19 @@ const Products = () => {
           Array.isArray(content) ? (
             filteredContent?.map((product, i) => (
               <div key={i} className={styles.itemCard}>
-                <img src={product.photo} className={styles.photo}></img>
+                <img src={'data:image/jpeg;base64,'+product.photo} className={styles.photo}></img>
                 <div className={styles.cardText}>
-                  <Link to={`/product/${product?.id}`}>
-                    <h3 className={styles.textItem}>{product.brand} {product.name}</h3>
+                  <Link to={`/product/${product?.type}/${product?.id}`}>
+                    <h3 className={styles.textItem}>{product?.brand?.name} {product.name}</h3>
                   </Link>
                   <div className={styles.textRow}>
                     <p className={styles.textItem}><b>Price: ${product.price}</b></p>
-                    <p className={styles.textItem}>Quantity: {product.quantityAvailable}</p>
+                    <p className={styles.textItem}>Quantity: {product.quantityInStock}</p>
                   </div>
-                  <p className={styles.textItem}>{product.description}</p>
+                  <p className={`${styles.textItem} ${styles.description}`}>{product.description}</p>
                   <div className={styles.textRow}>
                     <p className={styles.textItem}>Category: {product.type}</p>
-                    <p className={styles.textItem}>Brand: {product.brand}</p>
+                    <p className={styles.textItem}>Brand: {product?.brand?.name}</p>
                   </div>
                 </div>
               </div>

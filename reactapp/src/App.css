@@ -39,3 +39,8 @@ a:active {
 a:visited {
   color: black;
 }
+
+p {
+  margin: 0 0 14px 0;
+  padding: 0;
+}

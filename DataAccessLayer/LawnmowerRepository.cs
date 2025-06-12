@@ -16,7 +16,7 @@ public class LawnmowerRepository : Repository<Lawnmower>, ILawnmowerRepository
     /// <returns></returns>
     public override Lawnmower Get(int id)
     {
-        return All.FirstOrDefault(a => a.Id == id);
+        return All.Include(l => l.Brand).FirstOrDefault(a => a.Id == id);
     }
 
     /// <summary>
