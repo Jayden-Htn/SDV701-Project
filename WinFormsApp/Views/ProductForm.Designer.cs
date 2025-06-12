@@ -85,7 +85,7 @@
             SaveButton.Location = new Point(803, 62);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(102, 31);
-            SaveButton.TabIndex = 5;
+            SaveButton.TabIndex = 10;
             SaveButton.Text = "Save";
             SaveButton.UseVisualStyleBackColor = true;
             SaveButton.Click += OnSaveButtonClick;
@@ -95,7 +95,7 @@
             CloseButton.Location = new Point(803, 25);
             CloseButton.Name = "CloseButton";
             CloseButton.Size = new Size(102, 31);
-            CloseButton.TabIndex = 4;
+            CloseButton.TabIndex = 11;
             CloseButton.Text = "Close";
             CloseButton.UseVisualStyleBackColor = true;
             CloseButton.Click += OnCloseButtonClick;
@@ -105,14 +105,14 @@
             NameInput.Location = new Point(25, 152);
             NameInput.Name = "NameInput";
             NameInput.Size = new Size(279, 29);
-            NameInput.TabIndex = 6;
+            NameInput.TabIndex = 1;
             // 
             // FuelDetailsInput
             // 
             FuelDetailsInput.Location = new Point(25, 335);
             FuelDetailsInput.Name = "FuelDetailsInput";
             FuelDetailsInput.Size = new Size(281, 29);
-            FuelDetailsInput.TabIndex = 12;
+            FuelDetailsInput.TabIndex = 4;
             // 
             // label3
             // 
@@ -199,7 +199,7 @@
             StockNumeric.Location = new Point(25, 274);
             StockNumeric.Name = "StockNumeric";
             StockNumeric.Size = new Size(133, 29);
-            StockNumeric.TabIndex = 21;
+            StockNumeric.TabIndex = 3;
             // 
             // BrandCombo
             // 
@@ -207,7 +207,7 @@
             BrandCombo.Location = new Point(23, 396);
             BrandCombo.Name = "BrandCombo";
             BrandCombo.Size = new Size(279, 29);
-            BrandCombo.TabIndex = 22;
+            BrandCombo.TabIndex = 5;
             // 
             // label4
             // 
@@ -225,7 +225,7 @@
             DescriptionInput.Multiline = true;
             DescriptionInput.Name = "DescriptionInput";
             DescriptionInput.Size = new Size(375, 212);
-            DescriptionInput.TabIndex = 25;
+            DescriptionInput.TabIndex = 7;
             // 
             // ImageBox
             // 
@@ -241,7 +241,7 @@
             AddImageButton.Location = new Point(616, 423);
             AddImageButton.Name = "AddImageButton";
             AddImageButton.Size = new Size(102, 31);
-            AddImageButton.TabIndex = 28;
+            AddImageButton.TabIndex = 9;
             AddImageButton.Text = "Add";
             AddImageButton.UseVisualStyleBackColor = true;
             AddImageButton.Click += AddImageButton_Click;
@@ -251,7 +251,7 @@
             DeleteImageButton.Location = new Point(616, 386);
             DeleteImageButton.Name = "DeleteImageButton";
             DeleteImageButton.Size = new Size(102, 31);
-            DeleteImageButton.TabIndex = 27;
+            DeleteImageButton.TabIndex = 8;
             DeleteImageButton.Text = "Remove";
             DeleteImageButton.UseVisualStyleBackColor = true;
             DeleteImageButton.Click += DeleteImageButton_Click;
@@ -263,7 +263,7 @@
             PriceNumeric.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             PriceNumeric.Name = "PriceNumeric";
             PriceNumeric.Size = new Size(133, 29);
-            PriceNumeric.TabIndex = 29;
+            PriceNumeric.TabIndex = 2;
             // 
             // TypeInput
             // 
@@ -279,7 +279,7 @@
             TypeSpecificNumeric.Location = new Point(25, 521);
             TypeSpecificNumeric.Name = "TypeSpecificNumeric";
             TypeSpecificNumeric.Size = new Size(133, 29);
-            TypeSpecificNumeric.TabIndex = 31;
+            TypeSpecificNumeric.TabIndex = 6;
             // 
             // OpenFileDialog
             // 
