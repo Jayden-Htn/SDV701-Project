@@ -9,17 +9,15 @@ public class ProductPresenter
 {
     readonly IProductView _view;
     readonly ILawnmowerClient _lawnmowerClient;
-    readonly IServiceProvider _services;
 
     IList<BrandModel> _brands;
 
     public IProductView View => _view;
 
-    public ProductPresenter(IProductView view, ILawnmowerClient lawnmowerClient, IServiceProvider services)
+    public ProductPresenter(IProductView view, ILawnmowerClient lawnmowerClient)
     {
         _view = view;
         _lawnmowerClient = lawnmowerClient;
-        _services = services;
 
         _view.SaveRequested += OnSave;
         _view.CloseRequested += OnCloseRequested;
