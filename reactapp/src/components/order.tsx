@@ -34,7 +34,7 @@ const Order = () => {
       const orderObj = {
         id: 0,
         quantity: quantity,
-        timeCreated: new Date(),
+        timeCreated: new Date(new Date().getTime() + 12 * 60 * 60 * 1000),
         itemPrice: product!.price,
         customerName: customerName,
         customerEmail: customerEmail,
