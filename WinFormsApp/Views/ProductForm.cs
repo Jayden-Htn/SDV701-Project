@@ -89,6 +89,10 @@ namespace WinFormsApp.Views
                 {
                     ImageBox.Image = Image.FromStream(ms);
                 }
+            } 
+            else
+            {
+                ImageBox.Image = null;
             }
         }
 
@@ -106,11 +110,12 @@ namespace WinFormsApp.Views
                 model.QuantityInStock == 0
             )
             {
+                this.DialogResult = DialogResult.None;
                 MessageBox.Show("Missing form data", "Error");
             }
             else
             {
-                SaveButton.DialogResult = DialogResult.OK;
+                this.DialogResult = DialogResult.OK;
                 SaveRequested?.Invoke(this, model);
             }
         }

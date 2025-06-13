@@ -99,7 +99,7 @@ const Order = () => {
         </div>
         <div className={styles.buttonBox}>
           <button 
-            onClick={() => navigate(`/product/${product?.id}`)}
+            onClick={() => navigate(`/product/${product?.type}/${product?.id}`)}
           >
             Cancel
           </button>

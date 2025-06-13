@@ -58,7 +58,7 @@ namespace WinFormsApp.Presenters
             data.Brands = _brands;
             form.Model = data;
 
-            if (form.ShowDialog() == DialogResult.OK)
+            if (form.ShowDialog() == DialogResult.OK || form.ShowDialog() == DialogResult.None)
             {
                 Thread.Sleep(250); // Otherwise save hasn't finished and gets old data
                 await LoadDataAsync();
