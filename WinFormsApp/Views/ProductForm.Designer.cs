@@ -81,7 +81,6 @@
             // 
             // SaveButton
             // 
-            SaveButton.DialogResult = DialogResult.OK;
             SaveButton.Location = new Point(803, 62);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(102, 31);

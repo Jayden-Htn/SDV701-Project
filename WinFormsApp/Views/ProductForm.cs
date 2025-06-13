@@ -96,12 +96,21 @@ namespace WinFormsApp.Views
         {
             ILawnmowerModel model = GetData();
 
-            if (model.Name.Length == 0 || model.FuelDetails.Length == 0 || model.FuelDetails.Length == 0)
+            if (
+                model.Name.Length == 0 || 
+                model.FuelDetails.Length == 0 || 
+                model.Description.Length == 0 ||
+                model.Price == 0 ||
+                model.Type.Length == 0 ||
+                model.BrandId == 0 ||
+                model.QuantityInStock == 0
+            )
             {
                 MessageBox.Show("Missing form data", "Error");
             }
             else
             {
+                SaveButton.DialogResult = DialogResult.OK;
                 SaveRequested?.Invoke(this, model);
             }
         }
@@ -152,11 +161,13 @@ namespace WinFormsApp.Views
             {
                 using (var ms = new MemoryStream())
                 {
-                    ImageBox.Image.Save(ms, ImageFormat.Png);
-                    product.Photo = Convert.ToBase64String(ms.ToArray());
+                    using (var bmp = new Bitmap(ImageBox.Image))
+                    {
+                        bmp.Save(ms, ImageFormat.Png);
+                        product.Photo = Convert.ToBase64String(ms.ToArray());                                                     // use ms.ToArray() or ms.Position = 0 to use the stream
+                    }
                 }
             }
-
             return product;
         }
 

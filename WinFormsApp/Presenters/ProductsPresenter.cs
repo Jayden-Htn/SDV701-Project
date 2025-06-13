@@ -77,7 +77,7 @@ namespace WinFormsApp.Presenters
 
             if (form.ShowDialog() == DialogResult.OK)
             {
-                Thread.Sleep(200); // Otherwise save hasn't finished and gets old data
+                Thread.Sleep(300); // Otherwise save hasn't finished and gets old data
                 await LoadDataAsync();
             }
         }

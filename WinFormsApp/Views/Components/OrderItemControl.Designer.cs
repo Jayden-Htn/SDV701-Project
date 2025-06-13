@@ -170,7 +170,7 @@
             Controls.Add(ProductLabel);
             Controls.Add(IdLabel);
             Name = "OrderItemControl";
-            Size = new Size(842, 118);
+            Size = new Size(850, 118);
             ResumeLayout(false);
             PerformLayout();
         }
