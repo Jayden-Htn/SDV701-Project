@@ -66,7 +66,7 @@ VALUES
 		'Tooler’s Turf Terroriser X is a powerhouse ride-on lawnmower built for domination overgrown lawns, taming them into manicured masterpieces with speed and precision.', null),
 	('Lawn Pro 2022', 449.99, 10, 'Electric, 60V 4Ah battery', GETDATE(), 'Push', null, 32.4, 1,
 		'Tooler’s Lawn Pro 2022 is a budget friendly lawnmower for homeowners or professionals alike. With five different blade high settings, you can get your lawn trimmed to any length you desire.', null),
-	('Grass Guzzler 9000', 1999.99, 8, 'Petrol, 10 litre tank', GETDATE(), 'Push', null, 165.5, 2,
+	('Grass Guzzler 9000', 1999.99, 8, 'Petrol, 10 litre tank', GETDATE(), 'Push', null, 25.5, 2,
 		'MowGo presents a reenvisioned version of their award-winning homeowner’s lawnmower. The all-new Grass Guzzler 9000 will help you get your lawns tidy in no time.', null),
 	('Xtreme', 3999.99, 7, 'Petrol, 20 litre tank', GETDATE(), 'RideOn', 10, null, 2,
 		'MowGo''s Xtreme is the only ride-on lawnmower you''ll need. Taming any wild lawn will bcome an easy task.', null);
